@@ -1,0 +1,172 @@
+{
+  "newArrivals": [
+    {
+      "id": 1,
+      "title": "Dark Florish Onepiece",
+      "price": "$95.00",
+      "image": "https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg"
+    },
+    {
+      "id": 2,
+      "title": "Baggy Shirt",
+      "price": "$55.00",
+      "image": "https://images.pexels.com/photos/1536619/pexels-photo-1536619.jpeg"
+    },
+    {
+      "id": 3,
+      "title": "Cotton Off-White Shirt",
+      "price": "$65.00",
+      "image": "https://images.pexels.com/photos/298863/pexels-photo-298863.jpeg"
+    },
+    {
+      "id": 4,
+      "title": "Crop Sweater",
+      "price": "$50.00",
+      "image": "https://images.pexels.com/photos/428338/pexels-photo-428338.jpeg"
+    }
+  ],
+
+  "bestSelling": [
+    {
+      "id": 5,
+      "title": "DARK FLORISH ONEPIECE",
+      "price": "$95.00",
+      "image": "https://images.pexels.com/photos/985635/pexels-photo-985635.jpeg"
+    },
+    {
+      "id": 6,
+      "title": "BAGGY SHIRT",
+      "price": "$65.00",
+      "image": "https://images.pexels.com/photos/1040945/pexels-photo-1040945.jpeg"
+    },
+    {
+      "id": 7,
+      "title": "COTTON OFF-WHITE SHIRT",
+      "price": "$65.00",
+      "image": "https://images.pexels.com/photos/2983464/pexels-photo-2983464.jpeg"
+    },
+    {
+      "id": 8,
+      "title": "HANDMADE CROP SWEATER",
+      "price": "$50.00",
+      "image": "https://images.pexels.com/photos/6311612/pexels-photo-6311612.jpeg"
+    },
+    {
+      "id": 9,
+      "title": "WINTER LONG COAT",
+      "price": "$120.00",
+      "image": "https://images.pexels.com/photos/1126993/pexels-photo-1126993.jpeg"
+    },
+    {
+      "id": 10,
+      "title": "CASUAL DENIM JACKET",
+      "price": "$85.00",
+      "image": "https://images.pexels.com/photos/532588/pexels-photo-532588.jpeg"
+    }
+  ],
+
+  "collections": [
+    {
+      "id": 9,
+      "title": "SOFT LEATHER JACKETS",
+      "description": "Scelerisque duis aliquam qui lorem ipsum dolor amet, consectetur adipiscing elit.",
+      "image": "https://images.pexels.com/photos/6311392/pexels-photo-6311392.jpeg"
+    },
+    {
+      "id": 10,
+      "title": "WINTER COLLECTION",
+      "description": "Premium winter collection with soft texture and modern design.",
+      "image": "https://i.pinimg.com/1200x/74/ba/fb/74bafbc5fb3836e7c4a95f44029555d2.jpg"
+    },
+    {
+      "id": 11,
+      "title": "SUMMER FASHION",
+      "description": "Light and breathable summer fashion collection.",
+      "image": "https://images.pexels.com/photos/6626903/pexels-photo-6626903.jpeg"
+    }
+  ],
+
+"products": [
+
+{
+"id": 1,
+"title": "Dark Florish Onepiece",
+"price": 95,
+"image": "https://images.pexels.com/photos/985635/pexels-photo-985635.jpeg",
+"category": "women"
+},
+
+{
+"id": 2,
+"title": "Baggy Shirt",
+"price": 55,
+"image": "https://images.pexels.com/photos/1040945/pexels-photo-1040945.jpeg",
+"category": "men"
+},
+
+{
+"id": 3,
+"title": "Cotton Summer Dress",
+"price": 75,
+"image": "https://i.pinimg.com/736x/94/49/58/9449589e91c8af7cf2fd7bf7a7b39d6c.jpg",
+"category": "men"
+},
+
+{
+"id": 4,
+"title": "Casual Denim Jacket",
+"price": 85,
+"image": "https://images.pexels.com/photos/2983464/pexels-photo-2983464.jpeg",
+"category": "women"
+},
+
+{
+"id": 5,
+"title": "Stylish Sunglasses",
+"price": 35,
+"image": "https://images.pexels.com/photos/46710/pexels-photo-46710.jpeg",
+"category": "accessories"
+},
+
+{
+"id": 6,
+"title": "Leather Handbag",
+"price": 120,
+"image": "https://images.pexels.com/photos/1152077/pexels-photo-1152077.jpeg",
+"category": "accessories"
+},
+
+{
+"id": 7,
+"title": "Winter Long Coat",
+"price": 150,
+"image": "https://images.pexels.com/photos/1126993/pexels-photo-1126993.jpeg",
+"category": "women"
+},
+
+{
+"id": 8,
+"title": "Slim Fit T-Shirt",
+"price": 40,
+"image": "https://images.pexels.com/photos/428338/pexels-photo-428338.jpeg",
+"category": "women"
+},
+
+{
+"id": 9,
+"title": "Classic Wrist Watch",
+"price": 90,
+"image": "https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg",
+"category": "accessories"
+},
+
+{
+"id": 10,
+"title": "Crop Sweater",
+"price": 50,
+"image": "https://images.pexels.com/photos/6626903/pexels-photo-6626903.jpeg",
+"category": "men"
+}
+
+]
+}

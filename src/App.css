@@ -1,0 +1,164 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+ 
+  
+}
+
+/* NAVBAR */
+.navbar {
+  background: #2f4f46;
+  color: white;
+  padding: 20px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+}
+
+.nav-links li {
+  cursor: pointer;
+}
+
+.nav-icons span {
+  margin-left: 15px;
+}
+
+
+.hero {
+  height: 90vh;
+  background-image: url("https://images.pexels.com/photos/994523/pexels-photo-994523.jpeg");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+}
+
+.hero::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+}
+
+
+.hero {
+  color: white;
+  padding: 60px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.hero-left h1 {
+  font-size: 55px;
+}
+
+.hero-buttons {
+  margin-top: 20px;
+}
+
+.btn {
+  padding: 12px 25px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+}
+
+.primary {
+  background: #f9bf29;
+}
+
+.outline {
+  border: 1px solid white;
+  background: transparent;
+  color: white;
+}
+
+.dark {
+  background: black;
+  color: white;
+}
+
+/* PRODUCTS */
+.products {
+  display: flex;
+  justify-content: space-between;
+  padding: 70px;
+}
+
+.product-right {
+  display: flex;
+  gap: 25px;
+}
+
+.product-card {
+  background: #f4f4f4;
+  padding: 20px;
+  border-radius: 15px;
+  width: 180px;
+  text-align: center;
+  position: relative;
+}
+
+.circle-btn {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background: black;
+  color: white;
+  border: none;
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* CHOOSE */
+.choose {
+  display: flex;
+  justify-content: space-between;
+  padding: 70px;
+}
+
+.features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.choose-right img {
+  width: 350px;
+  border-radius: 20px;
+}
+
+/* HELP */
+.help {
+  padding: 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.help-images img {
+  width: 200px;
+  border-radius: 20px;
+  margin-right: 20px;
+}
+
+/* FOOTER */
+.footer {
+  background: #2f4f46;
+  color: white;
+  padding: 30px;
+  text-align: center;
+}
+
