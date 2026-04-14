@@ -1,150 +1,127 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 
 function BestSelling() {
   const [products, setProducts] = useState([]);
-  const sliderRef = useRef(null);
+  const [index, setIndex] = useState(0);
 
-  const [visible, setVisible] = useState(false);
-  const sectionRef = useRef(null);
+  const itemsPerView = 4; // desktop view
 
   useEffect(() => {
-    fetch("http://localhost:5000/bestSelling")
+    fetch("http://localhost:3000/bestSelling")
       .then((res) => res.json())
       .then((data) => setProducts(data));
   }, []);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setVisible(true);
-          }
-        });
-      },
-      { threshold: 0.2 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+  const next = () => {
+    if (index < products.length - itemsPerView) {
+      setIndex(index + 1);
     }
-
-    return () => observer.disconnect();
-  }, []);
-
-  const scrollLeft = () => {
-    sliderRef.current.scrollBy({
-      left: -1000,
-      behavior: "smooth",
-    });
   };
 
-  const scrollRight = () => {
-    sliderRef.current.scrollBy({
-      left: 1000,
-      behavior: "smooth",
-    });
+  const prev = () => {
+    if (index > 0) {
+      setIndex(index - 1);
+    }
   };
 
   return (
-    <>
-      <style>
-        {`
-          .slider::-webkit-scrollbar {
-            display: none;
-          }
-        `}
-      </style>
-
-      <section
-        ref={sectionRef}
+    <section
+      style={{
+        padding: "80px 6%",
+        position: "relative",
+        background: "#fafafa",
+        overflow: "hidden",
+      }}
+    >
+      <h2
         style={{
-          padding: "80px 5vw",
-          position: "relative",
-          transform: visible ? "translateX(0)" : "translateX(150px)",
-          opacity: visible ? 1 : 0,
-          transition: "all 0.8s ease",
+          textAlign: "center",
+          fontSize: "34px",
+          marginBottom: "50px",
+          fontFamily: "serif",
         }}
       >
-        <h2 style={{ textAlign: "center", marginBottom: "40px" }}>
-          BEST SELLING ITEMS
-        </h2>
+        BEST SELLING ITEMS
+      </h2>
 
-        <button
-          onClick={scrollLeft}
+      {/* LEFT */}
+      <button
+        onClick={prev}
+        style={{
+          position: "absolute",
+          top: "55%",
+          left: "10px",
+          transform: "translateY(-50%)",
+          background: "white",
+          border: "none",
+          padding: "12px",
+          borderRadius: "50%",
+          cursor: "pointer",
+          zIndex: 10,
+        }}
+      >
+        <FiArrowLeft />
+      </button>
+
+      {/* SLIDER */}
+      <div style={{ overflow: "hidden" }}>
+        <div
           style={{
-            position: "absolute",
-            left: "20px",
-            top: "50%",
-            transform: "translateY(-50%)",
-            background: "#0f0f0f",
-            border: "1px solid #f4f2f2",
-            color: "wheat",
-            padding: "10px",
-            cursor: "pointer",
-            zIndex: 2,
+            display: "flex",
+            gap: "25px",
+            transition: "0.5s ease",
+            transform: `translateX(-${index * 25}%)`,
           }}
         >
-          <FiArrowLeft />
-        </button>
-
-        <div style={{ overflow: "hidden" }}>
-          <div
-            ref={sliderRef}
-            className="slider"
-            style={{
-              display: "flex",
-              gap: "20px",
-              overflowX: "scroll",
-              scrollBehavior: "smooth",
-              scrollbarWidth: "none",   
-              msOverflowStyle: "none",  
-            }}
-          >
-            {products.map((product) => (
-              <div
-                key={product.id}
+          {products.map((product) => (
+            <div
+              key={product.id}
+              style={{
+                minWidth: "25%",
+                background: "#fff",
+                padding: "15px",
+                textAlign: "center",
+                borderRadius: "8px",
+              }}
+            >
+              <img
+                src={product.image}
+                alt={product.title}
                 style={{
-                  flex: "0 0 25%",
-                  maxWidth: "25%",
+                  width: "100%",
+                  height: "280px",
+                  objectFit: "cover",
                 }}
-              >
-                <img
-                  src={product.image}
-                  alt={product.title}
-                  style={{
-                    width: "100%",
-                    height: "300px",
-                    objectFit: "cover",
-                  }}
-                />
-                <h4>{product.title}</h4>
-                <p>{product.price}</p>
-              </div>
-            ))}
-          </div>
+              />
+              <h4 style={{ margin: "15px 0 5px" }}>
+                {product.title}
+              </h4>
+              <p style={{ color: "#888" }}>{product.price}</p>
+            </div>
+          ))}
         </div>
+      </div>
 
-        <button
-          onClick={scrollRight}
-          style={{
-            position: "absolute",
-            right: "20px",
-            top: "50%",
-            transform: "translateY(-50%)",
-            background: "#121111",
-            border: "1px solid #f3f1f1",
-            color: "wheat",
-            padding: "10px",
-            cursor: "pointer",
-            zIndex: 2,
-          }}
-        >
-          <FiArrowRight />
-        </button>
-      </section>
-    </>
+      {/* RIGHT */}
+      <button
+        onClick={next}
+        style={{
+          position: "absolute",
+          top: "55%",
+          right: "10px",
+          transform: "translateY(-50%)",
+          background: "white",
+          border: "none",
+          padding: "12px",
+          borderRadius: "50%",
+          cursor: "pointer",
+          zIndex: 10,
+        }}
+      >
+        <FiArrowRight />
+      </button>
+    </section>
   );
 }
 

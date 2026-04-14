@@ -1,30 +1,31 @@
 {
   "newArrivals": [
-    {
-      "id": 1,
-      "title": "Dark Florish Onepiece",
-      "price": "$95.00",
-      "image": "https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg"
-    },
-    {
-      "id": 2,
-      "title": "Baggy Shirt",
-      "price": "$55.00",
-      "image": "https://images.pexels.com/photos/1536619/pexels-photo-1536619.jpeg"
-    },
-    {
-      "id": 3,
-      "title": "Cotton Off-White Shirt",
-      "price": "$65.00",
-      "image": "https://images.pexels.com/photos/298863/pexels-photo-298863.jpeg"
-    },
-    {
-      "id": 4,
-      "title": "Crop Sweater",
-      "price": "$50.00",
-      "image": "https://images.pexels.com/photos/428338/pexels-photo-428338.jpeg"
-    }
-  ],
+  {
+    "id": 1,
+    "title": "Dark Florish Onepiece",
+    "price": 2499,
+    "image": "https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg"
+  },
+  {
+    "id": 2,
+    "title": "Baggy Shirt",
+    "price": 1499,
+    "image": "https://images.pexels.com/photos/1536619/pexels-photo-1536619.jpeg"
+  },
+  {
+    "id": 3,
+    "title": "Cotton Off-White Shirt",
+    "price": 1799,
+    "image": "https://images.pexels.com/photos/298863/pexels-photo-298863.jpeg"
+  },
+  {
+    "id": 4,
+    "title": "Crop Sweater",
+    "price": 1299,
+    "image": "https://images.pexels.com/photos/428338/pexels-photo-428338.jpeg"
+  }
+],
+
 
   "bestSelling": [
     {

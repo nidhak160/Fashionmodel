@@ -1,37 +1,72 @@
 import React from "react";
-import bgImage from "../assets/bg.jpg"; 
+import bgImage from "../assets/bg.jpg";
 
 function Hero() {
   return (
     <section
       style={{
-        minHeight: "75vh",
-        backgroundImage: `url(${bgImage})`, 
-        backgroundSize: "cover",           
-        backgroundPosition: "center",      
+        minHeight: "100vh",
+        backgroundImage: `url(${bgImage})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
         display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
         alignItems: "center",
-        textAlign: "center",
-        padding: "40px 20px",
-        animation: "fadeUp 1.2s ease-out",
+        padding: "0 8%",
         position: "relative",
       }}>
-      
-     
       <div
         style={{
           position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          background: "rgba(63, 64, 57, 0.1)",
+          inset: 0,
+          background:
+            "linear-gradient(to right, rgba(0,0,0,0.5), rgba(0,0,0,0.1))",
           zIndex: 1,
         }}
-      ></div>
+      />
+
+      <div
+        style={{
+          position: "relative",
+          zIndex: 2,
+          maxWidth: "500px",
+          color: "#fff",
+          animation: "fadeUp 1s ease-out",
+        }}
+      >
+        <h1
+          style={{
+            fontSize: "clamp(40px, 6vw, 70px)",
+            fontWeight: "600",
+            letterSpacing: "4px",
+            marginBottom: "15px",
+          }}>
+          NEW COLLECTION
+        </h1>
+
+        <p
+          style={{
+            fontSize: "16px",
+            lineHeight: "1.8",
+            marginBottom: "25px",
+            color: "#eee",
+          }}>
+          Discover timeless fashion designed for modern elegance.
+        </p>
+
+        <button
+          style={{
+            padding: "12px 30px",
+            border: "none",
+            background: "#fff",
+            color: "#000",
+            cursor: "pointer",
+            fontWeight: "500",
+            letterSpacing: "1px",
+          }}>
+          SHOP NOW
+        </button>
+      </div>
 
       <style>
         {`
@@ -47,33 +82,6 @@ function Hero() {
           }
         `}
       </style>
-
-<div
-  style={{
-    position: "absolute",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100%",
-    // Try 0.4 for a clearer image, or 0.6 if text is hard to read
-    background: "linear-gradient(to bottom, rgba(255,255,255,0.3), rgba(255,255,255,0.6))", 
-    zIndex: 1,
-  }}
-></div>
-
-<p
-  style={{
-    maxWidth: "750px",
-    fontSize: "clamp(14px, 2vw, 18px)",
-    lineHeight: "1.8",
-    color: "#090909", 
-    fontWeight: "400",
-    letterSpacing: "0.5px" 
-  }}
->
-  Lorem ipsum dolor sit amet consectetur adipisicing elit...
-</p>
-    
     </section>
   );
 }

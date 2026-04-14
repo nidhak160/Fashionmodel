@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./Shop.css";
 
 function Shop() {
-
   const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     Promise.all([
@@ -12,7 +14,6 @@ function Shop() {
     ])
       .then(([productsData, newArrivalsData, bestSellingData]) => {
 
-        // 🔥 Merge all data
         const allProducts = [
           ...productsData,
           ...newArrivalsData,
@@ -24,64 +25,40 @@ function Shop() {
       .catch(err => console.log(err));
   }, []);
 
-  return (
-    <div style={{ padding: "60px 5vw" }}>
+ return (
+  <div className="shop-container">
 
-      <h2 style={{ marginBottom: "30px", textAlign: "center" }}>
-        All Products
-      </h2>
+    <h2 className="shop-title">ALL PRODUCTS</h2>
 
-      <div style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(auto-fit, minmax(240px,1fr))",
-        gap: "30px"
-      }}>
+    <div className="shop-grid">
+      {products.map((product, index) => (
+        
+        <div
+          key={index}
+          className="product-card"
+          onClick={() => navigate(`/product/${product.id}`)}
+        >
 
-        {products.map((product, index) => (
+          {/* OPTIONAL TAG */}
+          {index % 2 === 0 && <div className="product-tag">NEW</div>}
 
-          <div key={index} style={{
-            border: "1px solid #e6e6e6",
-            borderRadius: "12px",
-            padding: "15px",
-            background: "#fff",
-            textAlign: "center"
-          }}>
-
-            {/* Image */}
-            <div style={{
-              height: "250px",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              background: "#f5f5f5",
-              borderRadius: "10px"
-            }}>
-              <img
-                src={product.image}
-                alt={product.title}
-                style={{
-                  maxWidth: "100%",
-                  maxHeight: "100%",
-                  objectFit: "contain"
-                }}
-              />
-            </div>
-
-            <h4 style={{ marginTop: "10px" }}>
-              {product.title}
-            </h4>
-
-            <p style={{ fontWeight: "bold" }}>
-              {product.price}
-            </p>
-
+          {/* IMAGE */}
+          <div className="product-image">
+            <img src={product.image} alt={product.title} />
           </div>
 
-        ))}
+          {/* INFO */}
+          <div className="product-info">
+            <h4 className="product-title">{product.title}</h4>
+            <p className="product-price">${product.price}</p>
+          </div>
 
-      </div>
+        </div>
+
+      ))}
     </div>
-  );
+  </div>
+);
 }
 
 export default Shop;

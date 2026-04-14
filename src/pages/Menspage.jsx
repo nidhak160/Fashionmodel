@@ -1,7 +1,7 @@
-import React from "react";
-import { FiHeart } from "react-icons/fi";
-import { addToCart, addToWishlist, isUserLoggedIn } from "../utils";
+import { React,useContext } from "react";
+import { CartContext } from "../context/CartContext";
 import { useNavigate } from "react-router-dom";
+
 
 import outfit1 from "../assets/outfit1.jpg";
 import outfit2 from "../assets/outfit2.jpg";
@@ -10,8 +10,9 @@ import kurta2 from "../assets/Herren Kurta Pyjama Set_ Armani Baumwollmischung, 
 
 function Menspage() {
 
-  const isLoggedIn = isUserLoggedIn();
-
+  const navigate = useNavigate();
+  const { addToCart } = useContext(CartContext);
+  const isLoggedIn = JSON.parse(localStorage.getItem("loggedUser"));
   const products = [
     { id: 1, title: "Beige Kurta Set", price: 1800, image: kurta2 },
     { id: 2, title: "Brown Kurta", price: 1600, image: kurta1 },
@@ -19,41 +20,30 @@ function Menspage() {
     { id: 4, title: "Black Casual Suit", price: 2800, image: outfit2 }
   ];
 
-const navigate = useNavigate();
-
   return (
     <div style={{ padding: "60px 5vw" }}>
 
-      <h2 style={{ marginBottom: "40px", fontSize: "26px", fontWeight: "600" }}>
-        Men's Collection
-      </h2>
+      <h2>Men's Collection</h2>
 
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(5, 1fr)",
-          gap: "30px"
-        }}
-      >
+      <div style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fit, minmax(240px,1fr))",
+        gap: "30px"
+      }}>
 
         {products.map((p) => (
 
-         <div
-  key={p.id}
-  onClick={() => navigate(`/product/${p.id}`, { state: p })}
-  style={{
-    border: "1px solid #e6e6e6",
-    borderRadius: "12px",
-    background: "#fff",
-    padding: "15px",
-    textAlign: "center",
-    cursor: "pointer",
-    position: "relative"
-  }}
->
-
-           
-             
+          <div
+            key={p.id}
+            onClick={() => navigate(`/product/${p.id}`, { state: p })}
+            style={{
+              border: "1px solid #e6e6e6",
+              borderRadius: "12px",
+              background: "#fff",
+              padding: "15px",
+              textAlign: "center",
+              cursor: "pointer"
+            }}>
 
             <img
               src={p.image}
@@ -62,49 +52,23 @@ const navigate = useNavigate();
                 width: "100%",
                 height: "320px",
                 objectFit: "cover",
-                borderRadius: "10px",
+                borderRadius: "10px"
               }}
             />
 
-            <h4
-              style={{
-                fontSize: "16px",
-                margin: "8px 0",
-                fontWeight: "600"
-              }}
-            >
-              {p.title}
-            </h4>
+            <h4>{p.title}</h4>
+            <p>₹{p.price}</p>
 
-            <p
-              style={{
-                fontSize: "15px",
-                fontWeight: "bold"
-              }}
-            >
-              ₹{p.price}
-            </p>
-
-            {/* ✅ Add to Cart (only if logged in) */}
             {isLoggedIn && (
               <button
-                onClick={(e) => {
-    e.stopPropagation(); // 🔥 IMPORTANT
-    addToCart(p);}}
-    
-                style={{
-                  marginTop: "10px",
-                  padding: "8px",
-                  width: "100%",
-                  background: "#000",
-                  color: "#fff",
-                  border: "none",
-                  borderRadius: "6px",
-                  cursor: "pointer"
-                }}
-              >
-                Add to Cart
-              </button>
+  onClick={(e) => {
+    e.stopPropagation();
+    console.log("ADDING:", p);
+    addToCart(p);
+  }}
+>
+  Add to Cart
+</button>
             )}
 
           </div>
@@ -112,7 +76,6 @@ const navigate = useNavigate();
         ))}
 
       </div>
-
     </div>
   );
 }

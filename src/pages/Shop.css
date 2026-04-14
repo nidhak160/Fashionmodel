@@ -1,0 +1,91 @@
+/* MAIN CONTAINER */
+.shop-container {
+  padding: 100px 5vw 60px;
+  background: #f7f7f7;
+}
+
+/* TITLE */
+.shop-title {
+  text-align: center;
+  font-size: 30px;
+  letter-spacing: 2px;
+  margin-bottom: 50px;
+  font-family: "Playfair Display", serif;
+}
+
+/* GRID */
+.shop-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 35px;
+}
+
+/* CARD */
+.product-card {
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: 0.4s ease;
+  border: 1px solid #eee;
+}
+
+/* HOVER EFFECT */
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+/* IMAGE BOX */
+.product-image {
+  height: 260px;
+  background: #fafafa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* IMAGE */
+.product-image img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: 0.4s ease;
+}
+
+/* IMAGE ZOOM */
+.product-card:hover img {
+  transform: scale(1.08);
+}
+
+/* CONTENT */
+.product-info {
+  padding: 15px;
+  text-align: center;
+}
+
+/* TITLE */
+.product-title {
+  font-size: 15px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+/* PRICE */
+.product-price {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* OPTIONAL TAG (NEW / SALE) */
+.product-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: black;
+  color: white;
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 4px;
+}

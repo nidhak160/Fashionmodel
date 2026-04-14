@@ -25,10 +25,11 @@ function BlogSection() {
 
   const sectionStyle = {
     padding: "80px 8%",
-    background: "#f5f5f5",
+    background: "#faf2f2",
     opacity: visible ? 1 : 0,
     transform: visible ? "translateY(0)" : "translateY(80px)",
     transition: "all 0.8s ease",
+    height:"569px"
   };
 
  const headerStyle = {

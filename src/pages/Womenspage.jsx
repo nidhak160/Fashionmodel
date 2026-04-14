@@ -1,6 +1,6 @@
 import React from "react";
 import { FiHeart } from "react-icons/fi";
-import { isUserLoggedIn } from "../utils/auth";
+import { isUserLoggedIn } from "../utils/index";
 import { useNavigate } from "react-router-dom";
 
 import dress1 from "../assets/dress1.jpg";

@@ -1,8 +1,11 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { CartContext } from "../context/CartContext";
 
 function CartPage() {
-  const { cart } = useContext(CartContext);
+
+  const { cart = [] } = useContext(CartContext);
+
+  console.log("CART:", cart);
 
   return (
     <div style={{ padding: "40px 5vw" }}>
@@ -11,36 +14,30 @@ function CartPage() {
       {cart.length === 0 ? (
         <p>No items added to cart.</p>
       ) : (
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
-            gap: "20px",
-            marginTop: "20px"
-          }}
-        >
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
+          gap: "20px",
+          marginTop: "20px"
+        }}>
           {cart.map((item, index) => (
-            <div
-              key={index}
-              style={{
-                border: "1px solid #ddd",
-                padding: "15px",
-                borderRadius: "8px",
-                textAlign: "center"
-              }}
-            >
+            <div key={index} style={{
+              border: "1px solid #ddd",
+              padding: "15px",
+              borderRadius: "8px",
+              textAlign: "center"
+            }}>
               <img
-                src={item.image}
-                alt={item.title}
+                src={item?.image}
+                alt={item?.title}
                 style={{
                   width: "100%",
                   height: "200px",
-                  objectFit: "cover",
-                  marginBottom: "10px"
+                  objectFit: "cover"
                 }}
               />
-              <h4>{item.title}</h4>
-              <p>${item.price}</p>
+              <h4>{item?.title}</h4>
+              <p>₹{item?.price}</p>
             </div>
           ))}
         </div>

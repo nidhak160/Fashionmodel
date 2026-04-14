@@ -1,72 +1,75 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState, useContext } from "react";
-import { CartContext } from "../context/CartContext";
-import { WishlistContext } from "../context/WishlistContext";
-import { FiHeart } from "react-icons/fi";
-import { FaHeart } from "react-icons/fa";
+import { useEffect, useState } from "react";
 
 function Productdetails() {
-  const { addToCart } = useContext(CartContext);
-  const { wishlist, toggleWishlist } = useContext(WishlistContext);
-
   const { id } = useParams();
   const [product, setProduct] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/products/${id}`)
-      .then(res => res.json())
-      .then(data => setProduct(data))
-      .catch(err => console.error(err));
+    fetch(`http://localhost:3000/products/${id}`)
+      .then((res) => res.json())
+      .then((data) => setProduct(data))
+      .catch((err) => console.error(err));
   }, [id]);
 
   if (!product) {
-    return <h2 style={{ padding: "100px" }}>Loading...</h2>;
+    return (
+      <h2 style={{ padding: "100px", textAlign: "center" }}>
+        Loading...
+      </h2>
+    );
   }
 
-const isWishlisted = wishlist.some(
-  item => String(item.id) === String(product.id)
-);
   return (
-    <div style={{ padding: "100px" }}>
-      <h1>{product.title}</h1>
-
-      <img src={product.image} width="300" alt={product.title} />
-
-      <h2>${product.price}</h2>
-
-      <p>{product.description}</p>
-
-     
-      <div style={{ display: "flex", gap: "20px", alignItems: "center" }}>
-        
-        <button
-          onClick={() => addToCart(product)}
+    <section
+      style={{
+        padding: "80px 8%",
+        display: "flex",
+        flexWrap: "wrap",
+        gap: "50px",
+        alignItems: "center",
+      }}
+    >
+      {/* IMAGE */}
+      <div style={{ flex: "1", minWidth: "300px" }}>
+        <img
+          src={product.image}
+          alt={product.title}
           style={{
-            padding: "14px 40px",
-            background: "black",
-            color: "white",
-            cursor: "pointer"
+            width: "100%",
+            maxHeight: "500px",
+            objectFit: "cover",
+            borderRadius: "10px",
           }}
-        >
-          ADD TO CART
-        </button>
-
-        <div
-          onClick={() => toggleWishlist(product)}
-          style={{
-            fontSize: "28px",
-            cursor: "pointer"
-          }}
-        >
-          {isWishlisted ? (
-            <FaHeart color="red" />
-          ) : (
-            <FiHeart />
-          )}
-        </div>
-
+        />
       </div>
-    </div>
+
+      {/* DETAILS */}
+      <div style={{ flex: "1", minWidth: "300px" }}>
+        <h1
+          style={{
+            fontSize: "36px",
+            marginBottom: "20px",
+            fontFamily: "serif",
+          }}
+        >
+          {product.title}
+        </h1>
+
+        <h2 style={{ marginBottom: "20px" }}>
+          ₹{product.price}
+        </h2>
+
+        <p
+          style={{
+            color: "#555",
+            lineHeight: "1.8",
+          }}
+        >
+          {product.description}
+        </p>
+      </div>
+    </section>
   );
 }
 

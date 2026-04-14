@@ -30,14 +30,14 @@ function Services() {
   ];
 
   return (
-    <section style={{ background: "#f7f7f7", padding: "100px 0" }}>
+    <section style={{ background: "#f7f7f7", padding: " 0 20px"}}>
      <div
   style={{
     width: "90%",
     margin: "auto",
     display: "flex",
     justifyContent: "center",
-    gap: "20px",   // reduced gap
+    gap: "20px",   
     flexWrap: "wrap"
   }}
 >
@@ -45,7 +45,7 @@ function Services() {
           <div
   key={item.id}
   style={{
-    width: "20%",   // reduced width
+    width: "20%",  
     background: "white",
     padding: "35px 20px",
     textAlign: "center",
@@ -73,7 +73,7 @@ function Services() {
                 height: "70px",
                 margin: "0 auto 25px",
                 borderRadius: "50%",
-                background: "#f2f2f2",
+                background: "#d9c7c7",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",

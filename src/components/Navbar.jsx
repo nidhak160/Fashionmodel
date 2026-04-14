@@ -1,33 +1,32 @@
 import React, { useState, useEffect, useContext, useCallback } from "react";
 import { FiSearch, FiMenu, FiX } from "react-icons/fi";
 import { CartContext } from "../context/CartContext";
-import { WishlistContext } from "../context/WishlistContext";
 import { Link, useNavigate } from "react-router-dom";
 
 function Navbar() {
-
   const { cart } = useContext(CartContext);
-  const { wishlist } = useContext(WishlistContext);
   const navigate = useNavigate();
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [menuOpen, setMenuOpen] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
-  const [searchText, setSearchText] = useState("");
+  const [scrolled, setScrolled] = useState(false);
   const user = JSON.parse(localStorage.getItem("loggedUser"));
-
   const logout = () => {
   localStorage.removeItem("loggedUser");
   navigate("/login");
-  window.location.reload();
 };
 
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    const handleScroll = () => setScrolled(window.scrollY > 50);
 
     window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   const toggleMenu = useCallback(() => {
@@ -35,49 +34,45 @@ function Navbar() {
   }, []);
 
   const navItems = [
-  { name: "HOME", path: "/" },
-  { name: "SHOP", path: "/shop" },
-  { name: "BLOG", path: "/blog" },
-  { name: "CONTACT US", path: "/contact" },
-  ...(user ? [
-    { name: "WISHLIST", path: "/wishlist" },
-    { name: "CART", path: "/cart" }
-  ] : [])
-];
+    { name: "HOME", path: "/" },
+    { name: "SHOP", path: "/shop" },
+    { name: "BLOG", path: "/blog" },
+    { name: "CONTACT", path: "/contact" },
+    ...(user
+      ? [
+          { name: "CART", path: "/cart" }
+        ]
+      : [])
+  ];
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    if (searchText.trim() === "") return;
-
-    navigate(`/shop?search=${searchText}`);
-    setShowSearch(false);
-    setSearchText("");
-  };
+  
 
   return (
     <header
       style={{
+        position: "fixed",
+        top: 0,
+        width: "100%",
+        padding: "18px 5vw",
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        padding: "18px 5vw",
-        background: "#bcbcaa",
-        borderBottom: "1px solid #ddd",
-        position: "sticky",
-        top: 0,
-        zIndex: 1000
+        zIndex: 1000,
+        transition: "0.3s",
+        background: scrolled ? "rgba(223, 213, 213, 0.9)" : "transparent",
+        backdropFilter: scrolled ? "blur(10px)" : "none",
+        color: scrolled ? "#000" : "#fff",
       }}>
-
+  
       <Link
         to="/"
         style={{
           fontSize: "28px",
-          fontFamily: "Georgia, serif",
-          letterSpacing: "2px",
+          fontFamily: "Playfair Display, serif",
+          letterSpacing: "3px",
           textDecoration: "none",
-          color: "black"
+          color: "inherit",
         }}>
-
         KAIRA
       </Link>
 
@@ -86,12 +81,10 @@ function Navbar() {
           style={{
             display: "flex",
             gap: "35px",
-            alignItems: "center",
             position: "absolute",
             left: "50%",
-            transform: "translateX(-50%)"
+            transform: "translateX(-50%)",
           }}>
-
           {navItems.map((item, index) => (
             <Link
               key={index}
@@ -99,96 +92,57 @@ function Navbar() {
               style={{
                 textDecoration: "none",
                 fontSize: "14px",
-                color: "black",
-                fontWeight: "500"
+                color: "inherit",
+                fontWeight: "500",
               }}>
-
               {item.name}
-              {item.name === "WISHLIST" && ` (${wishlist.length})`}
               {item.name === "CART" && ` (${cart.length})`}
             </Link>
           ))}
         </nav>
       )}
 
-
-      
-
       {!isMobile && (
-        <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
-
+        <div style={{ display: "flex", gap: "20px", alignItems: "center" }}>
           <FiSearch
             onClick={() => setShowSearch(!showSearch)}
-            style={{ fontSize: "20px", cursor: "pointer" }}/>
+            style={{ cursor: "pointer" }}/>
 
           {user ? (
             <button
               onClick={logout}
               style={{
-                padding: "6px 14px",
-                border: "1px solid black",
+                border: `1px solid ${scrolled ? "#000" : "#fff"}`,
                 background: "transparent",
+                color: "inherit",
+                padding: "6px 14px",
                 cursor: "pointer",
-                borderRadius: "4px"
-              }}
-            >
+              }}>
               LOGOUT
             </button>
           ) : (
             <Link
               to="/login"
               style={{
-                textDecoration: "none",
-                fontSize: "14px",
+                border: `1px solid ${scrolled ? "#000" : "#fff"}`,
                 padding: "6px 14px",
-                border: "1px solid black",
-                borderRadius: "4px",
-                color: "black",
-                fontWeight: "500"
-              }}
-            >
-              LOGIN
+                textDecoration: "none",
+                color: "inherit",
+                marginRight:"150px",
+              }} >
+             LOGIN
             </Link>
           )}
-
         </div>
       )}
 
-      {showSearch && (
-        <form
-          onSubmit={handleSearch}
-          style={{
-            position: "absolute",
-            top: "70px",
-            right: "5vw",
-            background: "white",
-            padding: "10px",
-            border: "1px solid #ddd",
-            borderRadius: "5px",
-            boxShadow: "0 5px 15px rgba(0,0,0,0.1)"
-          }}>
-            
-          <input
-            type="text"
-            placeholder="Search products..."
-            value={searchText}
-            onChange={(e) => setSearchText(e.target.value)}
-            style={{
-              padding: "8px",
-              width: "200px",
-              border: "1px solid #ccc",
-              outline: "none"
-            }}
-          />
-        </form>
-      )}
+     
 
       {isMobile && (
-        <div onClick={toggleMenu} style={{ fontSize: "26px", cursor: "pointer" }}>
+        <div onClick={toggleMenu} style={{ fontSize: "24px" }}>
           {menuOpen ? <FiX /> : <FiMenu />}
         </div>
       )}
-
     </header>
   );
 }
