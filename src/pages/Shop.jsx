@@ -8,9 +8,9 @@ function Shop() {
 
   useEffect(() => {
     Promise.all([
-      fetch("http://localhost:3000/products").then(res => res.json()),
-      fetch("http://localhost:3000/newArrivals").then(res => res.json()),
-      fetch("http://localhost:3000/bestSelling").then(res => res.json())
+      fetch("http://localhost:5000/products").then(res => res.json()),
+      fetch("http://localhost:5000/newArrivals").then(res => res.json()),
+      fetch("http://localhost:5000/bestSelling").then(res => res.json())
     ])
       .then(([productsData, newArrivalsData, bestSellingData]) => {
 
@@ -26,6 +26,8 @@ function Shop() {
   }, []);
 
  return (
+ 
+
   <div className="shop-container">
 
     <h2 className="shop-title">ALL PRODUCTS</h2>
@@ -39,15 +41,15 @@ function Shop() {
           onClick={() => navigate(`/product/${product.id}`)}
         >
 
-          {/* OPTIONAL TAG */}
+         
           {index % 2 === 0 && <div className="product-tag">NEW</div>}
 
-          {/* IMAGE */}
+        
           <div className="product-image">
             <img src={product.image} alt={product.title} />
           </div>
 
-          {/* INFO */}
+          
           <div className="product-info">
             <h4 className="product-title">{product.title}</h4>
             <p className="product-price">${product.price}</p>

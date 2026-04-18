@@ -59,9 +59,9 @@ function Navbar() {
         alignItems: "center",
         zIndex: 1000,
         transition: "0.3s",
-        background: scrolled ? "rgba(223, 213, 213, 0.9)" : "transparent",
+        background: scrolled ? "rgba(223, 213, 213, 0.9)" : "#afa3a3",
         backdropFilter: scrolled ? "blur(10px)" : "none",
-        color: scrolled ? "#000" : "#fff",
+        color: scrolled ? "#000" : "#746e6e",
       }}>
   
       <Link
@@ -112,24 +112,28 @@ function Navbar() {
             <button
               onClick={logout}
               style={{
-                border: `1px solid ${scrolled ? "#000" : "#fff"}`,
-                background: "transparent",
-                color: "inherit",
-                padding: "6px 14px",
-                cursor: "pointer",
-              }}>
+  border: `1px solid ${scrolled ? "#000" : "#fff"}`,
+  background: "transparent",
+  color: scrolled ? "#000" : "#fff",
+  padding: "6px 14px",
+  cursor: "pointer",
+  marginRight: "150px",
+  transition: "0.3s"
+}}>
               LOGOUT
             </button>
           ) : (
             <Link
               to="/login"
               style={{
-                border: `1px solid ${scrolled ? "#000" : "#fff"}`,
-                padding: "6px 14px",
-                textDecoration: "none",
-                color: "inherit",
-                marginRight:"150px",
-              }} >
+  background: scrolled ? "#000" : "#fff",
+  color: scrolled ? "#fff" : "#000",
+  padding: "6px 14px",
+  textDecoration: "none",
+  borderRadius: "9px",
+  marginRight: "150px",
+  transition: "0.3s"
+}} >
              LOGIN
             </Link>
           )}

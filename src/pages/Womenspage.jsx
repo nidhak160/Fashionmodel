@@ -1,5 +1,5 @@
-import React from "react";
-import { FiHeart } from "react-icons/fi";
+import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
 import { isUserLoggedIn } from "../utils/index";
 import { useNavigate } from "react-router-dom";
 
@@ -10,6 +10,7 @@ import dress4 from "../assets/dress4.jpg";
 
 function Womenspage() {
 
+  const { addToCart } = useContext(CartContext);
   const navigate = useNavigate();
   const loggedIn = isUserLoggedIn();
 
@@ -23,7 +24,7 @@ function Womenspage() {
   return (
     <div style={{ padding: "60px 5vw" }}>
 
-      {/* Title */}
+     
       <h2 style={{
         textAlign: "center",
         marginBottom: "50px",
@@ -33,7 +34,7 @@ function Womenspage() {
         Women's Collection
       </h2>
 
-      {/* Grid */}
+     
       <div style={{
         display: "grid",
         gridTemplateColumns: "repeat(auto-fit, minmax(260px,1fr))",
@@ -78,28 +79,11 @@ function Womenspage() {
                 style={{
                   maxWidth: "100%",
                   maxHeight: "100%",
-                  objectFit: "contain"   // ✅ FULL IMAGE
+                  objectFit: "contain"   
                 }}
               />
 
-              {/* Wishlist */}
-              {loggedIn && (
-                <div
-                  onClick={(e) => e.stopPropagation()}
-                  style={{
-                    position: "absolute",
-                    top: "12px",
-                    right: "12px",
-                    background: "#fff",
-                    padding: "8px",
-                    borderRadius: "50%",
-                    boxShadow: "0 2px 10px rgba(0,0,0,0.15)",
-                    cursor: "pointer"
-                  }}
-                >
-                  <FiHeart />
-                </div>
-              )}
+             
             </div>
 
             {/* Info */}
@@ -143,26 +127,26 @@ function Womenspage() {
               </div>
 
               {/* Add to Cart */}
-              {loggedIn && (
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();   // ✅ prevent navigation
-                    // addToCart(p);  // optional
-                  }}
-                  style={{
-                    marginTop: "12px",
-                    width: "100%",
-                    padding: "10px",
-                    border: "none",
-                    background: "#111",
-                    color: "#fff",
-                    borderRadius: "8px",
-                    cursor: "pointer"
-                  }}
-                >
-                  Add to Cart
-                </button>
-              )}
+             {loggedIn && (
+  <button
+    onClick={(e) => {
+      e.stopPropagation();
+      addToCart(p);  
+    }}
+    style={{
+      marginTop: "12px",
+      width: "100%",
+      padding: "10px",
+      border: "none",
+      background: "#111",
+      color: "#fff",
+      borderRadius: "8px",
+      cursor: "pointer"
+    }}
+  >
+    Add to Cart
+  </button>
+)}
 
             </div>
 

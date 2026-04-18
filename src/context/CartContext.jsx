@@ -11,8 +11,7 @@ export const CartProvider = ({ children }) => {
     return loggedUser?.email ? `cart_${loggedUser.email}` : "cart_guest";
   };
 
-  // ✅ Load cart on page load
- useEffect(() => {
+useEffect(() => {
   const loadCart = () => {
     const key = getCartKey();
     const savedCart = localStorage.getItem(key);
@@ -21,9 +20,13 @@ export const CartProvider = ({ children }) => {
 
   loadCart();
 
-  window.addEventListener("storage", loadCart);
+  const handleStorageChange = () => {
+    loadCart();
+  };
 
-  return () => window.removeEventListener("storage", loadCart);
+  window.addEventListener("storage", handleStorageChange);
+
+  return () => window.removeEventListener("storage", handleStorageChange);
 }, []);
 
   // ✅ Save cart when updated
@@ -33,14 +36,27 @@ export const CartProvider = ({ children }) => {
   }, [cart]);
 
   // ✅ Add to cart
-  const addToCart = useCallback((product) => {
-    setCart((prev) => {
-      const updatedCart = [...prev, product];
-      const key = getCartKey();
-      localStorage.setItem(key, JSON.stringify(updatedCart));
-      return updatedCart;
-    });
-  }, []);
+ const addToCart = useCallback((product) => {
+  setCart((prev) => {
+    const exists = prev.find(item => item.id === product.id);
+
+    let updatedCart;
+    if (exists) {
+      updatedCart = prev.map(item =>
+        item.id === product.id
+          ? { ...item, qty: (item.qty || 1) + 1 }
+          : item
+      );
+    } else {
+      updatedCart = [...prev, { ...product, qty: 1 }];
+    }
+
+    const key = getCartKey();
+    localStorage.setItem(key, JSON.stringify(updatedCart));
+
+    return updatedCart;
+  });
+}, []);
 
   // ✅ Remove from cart
   const removeFromCart = useCallback((index) => {

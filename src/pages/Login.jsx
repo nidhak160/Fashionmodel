@@ -8,24 +8,40 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = (e) => {
+ const handleLogin = (e) => {
   e.preventDefault();
 
-  const users = JSON.parse(localStorage.getItem("users")) || [];
+  const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
+
+  // ✅ Default user (works even if no one registered)
+  const defaultUser = {
+    email: "admin@gmail.com",
+    password: "123456"
+  };
+
+  // Combine default + registered users
+  const users = [defaultUser, ...storedUsers];
 
   const foundUser = users.find(
-    (u) => u.email === email && u.password === password
+    (u) =>
+      u.email === email.trim() &&
+      u.password === password.trim()
   );
 
   if (foundUser) {
-
     localStorage.setItem("loggedUser", JSON.stringify(foundUser));
+
+    // refresh cart or UI
+    window.dispatchEvent(new Event("storage"));
 
     navigate("/");
   } else {
     alert("Invalid Email or Password");
   }
 };
+
+
+
 
   return (
     <div style={{

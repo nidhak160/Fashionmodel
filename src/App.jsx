@@ -25,6 +25,7 @@ import Menspage from "./pages/Menspage";
 import Womenspage from "./pages/Womenspage";
 import Accessoriespage from "./pages/Accessoriespage";
 import Shop from "./pages/Shop";
+import NewArrivals from "./components/NewArrivals";
 
 
 function Home() {
@@ -35,6 +36,7 @@ function Home() {
       <Services />
       <CategorySection />
       <Productlist />
+      <NewArrivals />
       <PromoBanner />
       <Testimonial />
       <BestSelling />

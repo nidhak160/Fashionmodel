@@ -2,46 +2,100 @@ import React, { useContext } from "react";
 import { CartContext } from "../context/CartContext";
 
 function CartPage() {
+  const { cart, increaseQty, decreaseQty, removeFromCart } =
+    useContext(CartContext);
 
-  const { cart = [] } = useContext(CartContext);
-
-  console.log("CART:", cart);
+  if (cart.length === 0) {
+    return <h2 style={{ padding: "50px" }}>Cart is empty</h2>;
+  }
 
   return (
-    <div style={{ padding: "40px 5vw" }}>
-      <h2>Your Cart</h2>
+    <div style={{ padding: "40px 8vw", background: "#f1f3f6" }}>
+      <h2 style={{ marginBottom: "20px" }}>My Cart</h2>
 
-      {cart.length === 0 ? (
-        <p>No items added to cart.</p>
-      ) : (
-        <div style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
-          gap: "20px",
-          marginTop: "20px"
-        }}>
-          {cart.map((item, index) => (
-            <div key={index} style={{
-              border: "1px solid #ddd",
-              padding: "15px",
-              borderRadius: "8px",
-              textAlign: "center"
-            }}>
-              <img
-                src={item?.image}
-                alt={item?.title}
-                style={{
-                  width: "100%",
-                  height: "200px",
-                  objectFit: "cover"
-                }}
-              />
-              <h4>{item?.title}</h4>
-              <p>₹{item?.price}</p>
+      {cart.map((item) => (
+        <div
+          key={item.id}
+          style={{
+            display: "flex",
+            gap: "20px",
+            background: "#fff",
+            padding: "20px",
+            marginBottom: "15px",
+            borderRadius: "8px",
+            alignItems: "center"
+          }}
+        >
+          {/* LEFT IMAGE */}
+          <img
+            src={item.image}
+            alt={item.title}
+            style={{
+              width: "120px",
+              height: "120px",
+              objectFit: "cover",
+              borderRadius: "6px"
+            }}
+          />
+
+          {/* MIDDLE DETAILS */}
+          <div style={{ flex: 1 }}>
+            <h4 style={{ marginBottom: "5px" }}>{item.title}</h4>
+
+            <p style={{ color: "green", fontSize: "14px" }}>
+              ⭐ 4.0 | Assured
+            </p>
+
+            <p style={{ fontSize: "18px", fontWeight: "bold" }}>
+              ₹{item.price}
+            </p>
+
+            <p style={{ color: "#555", fontSize: "14px" }}>
+              Delivery by Tomorrow
+            </p>
+
+            {/* ➕➖ Qty */}
+            <div style={{ marginTop: "10px" }}>
+              <button onClick={() => decreaseQty(item.id)}>-</button>
+
+              <span style={{ margin: "0 10px" }}>{item.qty}</span>
+
+              <button onClick={() => increaseQty(item.id)}>+</button>
             </div>
-          ))}
+          </div>
+
+          {/* RIGHT ACTIONS */}
+          <div style={{ textAlign: "right" }}>
+            <button
+              onClick={() => removeFromCart(item.id)}
+              style={{
+                background: "none",
+                border: "none",
+                color: "red",
+                cursor: "pointer",
+                marginBottom: "10px"
+              }}
+            >
+              Remove
+            </button>
+
+            <br />
+
+            <button
+              style={{
+                background: "#fb641b",
+                color: "#fff",
+                border: "none",
+                padding: "10px 15px",
+                borderRadius: "5px",
+                cursor: "pointer"
+              }}
+            >
+              Buy Now
+            </button>
+          </div>
         </div>
-      )}
+      ))}
     </div>
   );
 }
