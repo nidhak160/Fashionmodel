@@ -26,6 +26,8 @@ import Womenspage from "./pages/Womenspage";
 import Accessoriespage from "./pages/Accessoriespage";
 import Shop from "./pages/Shop";
 import NewArrivals from "./components/NewArrivals";
+import Checkout from "./components/Checkout";
+import OrderForm from "./pages/OrderForm";
 
 
 function Home() {
@@ -77,6 +79,8 @@ function App() {
   <Route path="/womens" element={<Womenspage />} />
   <Route path="/accessories" element={<Accessoriespage />} />
   <Route path="/shop" element={<Shop />} />
+  <Route path="/checkout" element={<Checkout />} />
+  <Route path="/order-form" element={<OrderForm />} />
 </Routes>
 
       </BrowserRouter>

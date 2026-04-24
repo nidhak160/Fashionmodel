@@ -4,22 +4,19 @@ import { useNavigate, Link } from "react-router-dom";
 function Login() {
 
   const navigate = useNavigate();
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
- const handleLogin = (e) => {
+   const handleLogin = (e) => {
   e.preventDefault();
 
   const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
 
-  // ✅ Default user (works even if no one registered)
   const defaultUser = {
     email: "admin@gmail.com",
     password: "123456"
   };
 
-  // Combine default + registered users
+  
   const users = [defaultUser, ...storedUsers];
 
   const foundUser = users.find(
@@ -31,16 +28,14 @@ function Login() {
   if (foundUser) {
     localStorage.setItem("loggedUser", JSON.stringify(foundUser));
 
-    // refresh cart or UI
-    window.dispatchEvent(new Event("storage"));
+   
+    window.dispatchEvent(new Event("userChanged"));
 
     navigate("/");
   } else {
     alert("Invalid Email or Password");
   }
 };
-
-
 
 
   return (

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { CartContext } from "../context/CartContext";
 import { useNavigate } from "react-router-dom";
-import { isUserLoggedIn } from "../utils";   // ✅ FIX ADDED
+import { isUserLoggedIn } from "../utils";   
 
 function Accessoriespage() {
 
@@ -59,8 +59,7 @@ function Accessoriespage() {
             onMouseLeave={(e) => {
               e.currentTarget.style.transform = "translateY(0)";
               e.currentTarget.style.boxShadow = "0 4px 12px rgba(0,0,0,0.05)";
-            }}
-          >
+            }}>
 
             <img
               src={p.image}
@@ -70,8 +69,7 @@ function Accessoriespage() {
                 height: "320px",
                 objectFit: "cover",
                 borderRadius: "10px"
-              }}
-            />
+              }}/>
 
             <h4 style={{
               margin: "12px 0",

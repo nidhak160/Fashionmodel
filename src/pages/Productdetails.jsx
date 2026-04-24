@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, useNavigate  } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
 import { isUserLoggedIn } from "../utils";
 
 function Productdetails() {
   const { id } = useParams();
   const location = useLocation();
-
+  const navigate = useNavigate();
   const { addToCart } = useContext(CartContext);
   const isLoggedIn = isUserLoggedIn();
 
@@ -37,12 +37,12 @@ function Productdetails() {
       });
   }, [id, location.state]);
 
-  // ⏳ Loading
+  
   if (loading) {
     return <h2 style={{ padding: "50px" }}>Loading...</h2>;
   }
 
-  // ❌ Not found
+  
   if (!finalProduct) {
     return <h2 style={{ padding: "50px" }}>Product not found</h2>;
   }
@@ -68,7 +68,7 @@ function Productdetails() {
           flexWrap: "wrap"
         }}
       >
-        {/* LEFT */}
+        
         <div
           style={{
             flex: "1",
@@ -92,7 +92,7 @@ function Productdetails() {
           />
         </div>
 
-        {/* RIGHT */}
+      
         <div
           style={{
             flex: "1",

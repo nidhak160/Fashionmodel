@@ -1,9 +1,12 @@
 import React, { useContext } from "react";
 import { CartContext } from "../context/CartContext";
+import { useNavigate } from "react-router-dom"; // ✅ ADD THIS
 
 function CartPage() {
   const { cart, increaseQty, decreaseQty, removeFromCart } =
     useContext(CartContext);
+
+  const navigate = useNavigate(); // ✅ ADD THIS
 
   if (cart.length === 0) {
     return <h2 style={{ padding: "50px" }}>Cart is empty</h2>;
@@ -14,86 +17,34 @@ function CartPage() {
       <h2 style={{ marginBottom: "20px" }}>My Cart</h2>
 
       {cart.map((item) => (
-        <div
-          key={item.id}
-          style={{
-            display: "flex",
-            gap: "20px",
-            background: "#fff",
-            padding: "20px",
-            marginBottom: "15px",
-            borderRadius: "8px",
-            alignItems: "center"
-          }}
-        >
-          {/* LEFT IMAGE */}
-          <img
-            src={item.image}
-            alt={item.title}
-            style={{
-              width: "120px",
-              height: "120px",
-              objectFit: "cover",
-              borderRadius: "6px"
-            }}
-          />
+        <div key={item.id} style={{ display: "flex", gap: "20px", background: "#fff", padding: "20px", marginBottom: "15px", borderRadius: "8px", alignItems: "center" }}>
 
-          {/* MIDDLE DETAILS */}
+          <img src={item.image} alt={item.title} style={{ width: "120px", height: "120px", objectFit: "cover", borderRadius: "6px" }} />
+
           <div style={{ flex: 1 }}>
-            <h4 style={{ marginBottom: "5px" }}>{item.title}</h4>
+            <h4>{item.title}</h4>
+        <p style={{ fontSize: "18px", fontWeight: "bold" }}>
+       ₹{item.price * (item.qty || 1)}
+      </p>
 
-            <p style={{ color: "green", fontSize: "14px" }}>
-              ⭐ 4.0 | Assured
-            </p>
-
-            <p style={{ fontSize: "18px", fontWeight: "bold" }}>
-              ₹{item.price}
-            </p>
-
-            <p style={{ color: "#555", fontSize: "14px" }}>
-              Delivery by Tomorrow
-            </p>
-
-            {/* ➕➖ Qty */}
-            <div style={{ marginTop: "10px" }}>
+            <div>
               <button onClick={() => decreaseQty(item.id)}>-</button>
-
-              <span style={{ margin: "0 10px" }}>{item.qty}</span>
-
+              <span>{item.qty}</span>
               <button onClick={() => increaseQty(item.id)}>+</button>
             </div>
           </div>
 
-          {/* RIGHT ACTIONS */}
-          <div style={{ textAlign: "right" }}>
-            <button
-              onClick={() => removeFromCart(item.id)}
-              style={{
-                background: "none",
-                border: "none",
-                color: "red",
-                cursor: "pointer",
-                marginBottom: "10px"
-              }}
-            >
-              Remove
-            </button>
+          <div>
+            <button onClick={() => removeFromCart(item.id)}>Remove</button>
 
-            <br />
-
+            {/* ✅ BUY NOW FIXED */}
             <button
-              style={{
-                background: "#fb641b",
-                color: "#fff",
-                border: "none",
-                padding: "10px 15px",
-                borderRadius: "5px",
-                cursor: "pointer"
-              }}
+              onClick={() => navigate("/checkout", { state: item })}
             >
               Buy Now
             </button>
           </div>
+
         </div>
       ))}
     </div>

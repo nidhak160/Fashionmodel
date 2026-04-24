@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
 import { useNavigate } from "react-router-dom";
 
@@ -10,31 +10,38 @@ import kurta2 from "../assets/Herren Kurta Pyjama Set_ Armani Baumwollmischung, 
 function Menspage() {
   const navigate = useNavigate();
 
-  const {
-    cart,
-    addToCart,
-    increaseQty,
-    decreaseQty,
-    removeFromCart
-  } = useContext(CartContext);
+  const { cart, addToCart, increaseQty, decreaseQty } =
+    useContext(CartContext);
 
-  const isLoggedIn = JSON.parse(localStorage.getItem("loggedUser"));
+  const loggedIn = !!localStorage.getItem("loggedUser");
 
   const products = [
-    { id: 1, title: "Beige Kurta Set", price: 1800, image: kurta2 },
-    { id: 2, title: "Brown Kurta", price: 1600, image: kurta1 },
-    { id: 3, title: "Classic Beige Coat", price: 3200, image: outfit1 },
-    { id: 4, title: "Black Casual Suit", price: 2800, image: outfit2 }
+    { id: 1, brand: "Manyavar", title: "Beige Kurta Set", price: 1800, oldPrice: 2500, image: kurta2 },
+    { id: 2, brand: "Fabindia", title: "Brown Kurta", price: 1600, oldPrice: 2200, image: kurta1 },
+    { id: 3, brand: "Raymond", title: "Classic Beige Coat", price: 3200, oldPrice: 4200, image: outfit1 },
+    { id: 4, brand: "Louis Philippe", title: "Black Casual Suit", price: 2800, oldPrice: 3500, image: outfit2 }
   ];
 
   return (
     <div style={{ padding: "60px 5vw" }}>
-      <h2>Men's Collection</h2>
 
+      {/* Heading */}
+      <h2
+        style={{
+          textAlign: "center",
+          marginBottom: "50px",
+          fontSize: "30px",
+          fontWeight: "700"
+        }}
+      >
+        Men's Collection
+      </h2>
+
+      {/* Grid */}
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(240px,1fr))",
+          gridTemplateColumns: "repeat(auto-fit, minmax(260px,1fr))",
           gap: "30px"
         }}
       >
@@ -44,80 +51,113 @@ function Menspage() {
           return (
             <div
               key={p.id}
+              onClick={() => navigate(`/product/${p.id}`, { state: p })}
               style={{
                 border: "1px solid #e6e6e6",
                 borderRadius: "12px",
                 background: "#fff",
                 padding: "15px",
-                textAlign: "center"
+                cursor: "pointer",
+                transition: "0.3s"
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "translateY(-6px)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "translateY(0)";
               }}
             >
-              {/* ✅ Only image click navigates */}
-              <img
-                src={p.image}
-                alt={p.title}
-                onClick={() => navigate(`/product/${p.id}`, { state: p })}
+
+              {/* Image */}
+              <div
                 style={{
                   width: "100%",
                   height: "320px",
-                  objectFit: "cover",
-                  borderRadius: "10px",
-                  cursor: "pointer"
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  background: "#f5f5f5",
+                  borderRadius: "10px"
                 }}
-              />
+              >
+                <img
+                  src={p.image}
+                  alt={p.title}
+                  style={{
+                    maxWidth: "100%",
+                    maxHeight: "100%",
+                    objectFit: "contain"
+                  }}
+                />
+              </div>
 
-              <h4>{p.title}</h4>
-              <p>₹{p.price}</p>
+              {/* Info */}
+              <div style={{ padding: "15px" }}>
+                <p style={{ fontSize: "13px", color: "#888" }}>
+                  {p.brand}
+                </p>
 
-              {isLoggedIn && (
-                <>
-                  {!cartItem ? (
-                    // 👉 Add button
-                    <button
-                      onClick={() => addToCart(p)}
-                      style={{
-                        padding: "10px",
-                        background: "#000",
-                        color: "#fff",
-                        border: "none",
-                        borderRadius: "6px",
-                        cursor: "pointer"
-                      }}
-                    >
-                      Add to Cart
-                    </button>
-                  ) : (
-                    // 👉 + - Remove
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        gap: "10px"
-                      }}
-                    >
-                      <button onClick={() => decreaseQty(p.id)}>-</button>
+                <h4 style={{ fontSize: "16px", fontWeight: "600" }}>
+                  {p.title}
+                </h4>
 
-                      <span>{cartItem.qty}</span>
+                <div style={{ display: "flex", gap: "10px", marginTop: "5px" }}>
+                  <span style={{ fontWeight: "bold" }}>₹{p.price}</span>
 
-                      <button onClick={() => increaseQty(p.id)}>+</button>
+                  <span
+                    style={{
+                      textDecoration: "line-through",
+                      color: "#aaa"
+                    }}
+                  >
+                    ₹{p.oldPrice}
+                  </span>
+                </div>
 
+                {/* Cart Button */}
+                {loggedIn && (
+                  <>
+                    {!cartItem ? (
                       <button
-                        onClick={() => removeFromCart(p.id)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          addToCart(p);
+                        }}
                         style={{
-                          background: "red",
-                          color: "#fff",
+                          marginTop: "12px",
+                          width: "100%",
+                          padding: "10px",
                           border: "none",
-                          padding: "5px 10px",
-                          borderRadius: "5px"
+                          background: "#111",
+                          color: "#fff",
+                          borderRadius: "8px",
+                          cursor: "pointer"
                         }}
                       >
-                        Remove
+                        Add to Cart
                       </button>
-                    </div>
-                  )}
-                </>
-              )}
+                    ) : (
+                      <div
+                        onClick={(e) => e.stopPropagation()}
+                        style={{
+                          marginTop: "12px",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          gap: "12px"
+                        }}
+                      >
+                        <button onClick={() => decreaseQty(p.id)}>-</button>
+
+                        <span>{cartItem.qty || 1}</span>
+
+                        <button onClick={() => increaseQty(p.id)}>+</button>
+                      </div>
+                    )}
+                  </>
+                )}
+              </div>
+
             </div>
           );
         })}

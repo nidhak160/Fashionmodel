@@ -1,7 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { CartContext } from "../context/CartContext";
 
 function NewArrivals() {
   const [items, setItems] = useState([]);
+  const navigate = useNavigate();
+  const { addToCart } = useContext(CartContext); // (not needed here, but ok)
 
   useEffect(() => {
     fetch("http://localhost:5000/newArrivals")
@@ -24,17 +28,18 @@ function NewArrivals() {
         OUR NEW ARRIVALS
       </h2>
 
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-          gap: "30px",
-          marginTop: "40px",
-        }}
-      >
+      <div style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+        gap: "30px",
+        marginTop: "40px",
+      }}>
         {items.map(item => (
           <div
             key={item.id}
+            onClick={() =>
+              navigate(`/product/${item.id}`, { state: item })
+            }
             style={{
               background: "#fff",
               padding: "12px",

@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 function Navbar() {
   const { cart } = useContext(CartContext);
   const navigate = useNavigate();
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [isMobile, setIsMobile] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -17,17 +17,19 @@ function Navbar() {
 };
 
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth <= 768);
-    const handleScroll = () => setScrolled(window.scrollY > 50);
+  const handleResize = () => setIsMobile(window.innerWidth <= 600);
+  const handleScroll = () => setScrolled(window.scrollY > 50);
 
-    window.addEventListener("resize", handleResize);
-    window.addEventListener("scroll", handleScroll);
+  handleResize(); // run once
 
-    return () => {
-      window.removeEventListener("resize", handleResize);
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+  window.addEventListener("resize", handleResize);
+  window.addEventListener("scroll", handleScroll);
+
+  return () => {
+    window.removeEventListener("resize", handleResize);
+    window.removeEventListener("scroll", handleScroll);
+  };
+}, []);
 
   const toggleMenu = useCallback(() => {
     setMenuOpen((prev) => !prev);
@@ -117,7 +119,7 @@ function Navbar() {
   color: scrolled ? "#000" : "#fff",
   padding: "6px 14px",
   cursor: "pointer",
-  marginRight: "150px",
+  marginRight: isMobile ? "0px" : "40px",
   transition: "0.3s"
 }}>
               LOGOUT
