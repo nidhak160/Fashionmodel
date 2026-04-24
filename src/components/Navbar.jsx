@@ -106,9 +106,6 @@ function Navbar() {
 
       {!isMobile && (
         <div style={{ display: "flex", gap: "20px", alignItems: "center" }}>
-          <FiSearch
-            onClick={() => setShowSearch(!showSearch)}
-            style={{ cursor: "pointer" }}/>
 
           {user ? (
             <button
