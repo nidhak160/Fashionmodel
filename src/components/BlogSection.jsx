@@ -23,14 +23,13 @@ function BlogSection() {
     return () => observer.disconnect();
   }, []);
 
-  const sectionStyle = {
-    padding: "80px 8%",
-    background: "#faf2f2",
-    opacity: visible ? 1 : 0,
-    transform: visible ? "translateY(0)" : "translateY(80px)",
-    transition: "all 0.8s ease",
-    height:"569px"
-  };
+ const sectionStyle = {
+  padding: "80px 8%",
+  background: "#faf2f2",
+  opacity: visible ? 1 : 0,
+  transform: visible ? "translateY(0)" : "translateY(80px)",
+  transition: "all 0.8s ease",
+};
 
  const headerStyle = {
   display: "flex",

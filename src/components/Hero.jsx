@@ -14,6 +14,7 @@ function Hero() {
         alignItems: "center",
         padding: "0 8%",
         position: "relative",
+       marginTop: "-100px"
       }}>
       <div
         style={{

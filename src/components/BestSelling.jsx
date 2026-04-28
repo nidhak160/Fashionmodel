@@ -5,10 +5,10 @@ function BestSelling() {
   const [products, setProducts] = useState([]);
   const [index, setIndex] = useState(0);
 
-  const itemsPerView = 4; // desktop view
+  const itemsPerView = 4; 
 
   useEffect(() => {
-    fetch("http://localhost:3000/bestSelling")
+    fetch("http://localhost:5000/bestSelling")
       .then((res) => res.json())
       .then((data) => setProducts(data));
   }, []);

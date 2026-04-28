@@ -1,20 +1,21 @@
 import React from "react";
-import { FaFacebookF, FaTwitter, FaYoutube, FaPinterestP, FaInstagram } from "react-icons/fa";
+import {FaFacebookF,FaTwitter,FaYoutube,FaPinterestP,FaInstagram,} from "react-icons/fa";
+import "./Footer.css";
 
 function Footer() {
   return (
-    <footer style={styles.footer}>
-      <div style={styles.container}>
-        
-        <div style={styles.column}>
-          <h2 style={styles.logo}>KAIRA</h2>
-          <p style={styles.text}>
+    <footer className="footer">
+      <div className="footer-container">
+
+        {/* Column 1 */}
+        <div className="footer-col">
+          <h2 className="logo">KAIRA</h2>
+          <p>
             Gravida massa volutpat aenean odio. Amet, turpis erat nullam
-            fringilla elementum diam in. Nisi, purus vitae, ultrices nunc.
-            Sit ac sit suscipit hendrerit.
+            fringilla elementum diam in.
           </p>
 
-          <div style={styles.social}>
+          <div className="social">
             <FaFacebookF />
             <FaTwitter />
             <FaYoutube />
@@ -23,91 +24,43 @@ function Footer() {
           </div>
         </div>
 
-        <div style={styles.column}>
-          <h3 style={styles.heading}>QUICK LINKS</h3>
-          <ul style={styles.list}>
-            <li>HOME</li>
-            <li>ABOUT</li>
-            <li>SERVICES</li>
-            <li>SINGLE ITEM</li>
-            <li>CONTACT</li>
+        {/* Column 2 */}
+        <div className="footer-col">
+          <h3>QUICK LINKS</h3>
+          <ul>
+            <li>Home</li>
+            <li>About</li>
+            <li>Services</li>
+            <li>Single Item</li>
+            <li>Contact</li>
           </ul>
         </div>
 
-        <div style={styles.column}>
-          <h3 style={styles.heading}>HELP & INFO</h3>
-          <ul style={styles.list}>
-            <li>TRACK YOUR ORDER</li>
-            <li>RETURNS + EXCHANGES</li>
-            <li>SHIPPING + DELIVERY</li>
-            <li>CONTACT US</li>
-            <li>FAQS</li>
+        {/* Column 3 */}
+        <div className="footer-col">
+          <h3>HELP & INFO</h3>
+          <ul>
+            <li>Track Your Order</li>
+            <li>Returns + Exchanges</li>
+            <li>Shipping + Delivery</li>
+            <li>Contact Us</li>
+            <li>FAQs</li>
           </ul>
         </div>
 
-        <div style={styles.column}>
-          <h3 style={styles.heading}>CONTACT US</h3>
-          <p style={styles.text}>
-            Do you have any questions or suggestions?
-          </p>
-          <p style={styles.bold}>contact@kaira.com</p>
+        {/* Column 4 */}
+       <div className="footer-col">
+  <h3>CONTACT US</h3>
+  <p>Do you have any questions?</p>
+  <p className="bold">contact@kaira.com</p>
 
-          <p style={{ ...styles.text, marginTop: "20px" }}>
-            Do you need support? Give us a call.
-          </p>
-          <p style={styles.bold}>+43 720 11 52 78</p>
-        </div>
+  <p className="mt">Need support? Call us.</p>
+  <p className="bold">+43 720 11 52 78</p>
+</div>
+
       </div>
     </footer>
   );
 }
-
-const styles = {
-  footer: {
-    background: "#d5cccc",
-    padding: "80px 5vw",
-  },
-  container: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-    gap: "40px",
-  },
-  column: {},
-  logo: {
-    fontSize: "36px",
-    letterSpacing: "2px",
-    marginBottom: "20px",
-  },
-  heading: {
-    fontSize: "18px",
-    marginBottom: "20px",
-    letterSpacing: "1px",
-  },
-  text: {
-    color: "#666",
-    lineHeight: "1.8",
-    fontSize: "14px",
-  },
-  bold: {
-    fontWeight: "600",
-    fontSize: "15px",
-  },
-  list: {
-    listStyle: "none",
-    padding: 0,
-    margin: 0,
-    color: "#444",
-    fontSize: "14px",
-    lineHeight: "2",
-  },
-  social: {
-    display: "flex",
-    gap: "15px",
-    marginTop: "20px",
-    fontSize: "16px",
-    color: "#555",
-    cursor: "pointer",
-  },
-};
 
 export default Footer;

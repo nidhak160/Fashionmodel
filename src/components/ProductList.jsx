@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import ProductCard from "./Productcard";
-import { useSearchParams, useNavigate } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 function ProductList() {
 
@@ -8,7 +8,6 @@ function ProductList() {
   const [visible, setVisible] = useState(false);
   const sectionRef = useRef(null);
   const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
 
   const search = searchParams.get("search") || "";
 
@@ -16,19 +15,16 @@ function ProductList() {
     product.title.toLowerCase().includes(search.toLowerCase())
   );
 
-  // ✅ Fetch products
   useEffect(() => {
   fetch("http://localhost:5000/products")
     .then(res => res.json())
     .then(data => {
       setProducts(data);
 
-      // ✅ SAVE HERE
       localStorage.setItem("products", JSON.stringify(data));
     });
 }, []);
 
-  // ✅ Animation
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -78,9 +74,6 @@ function ProductList() {
         {filteredProducts.slice(0, 4).map((product, index) => (
           <div
             key={product.id}
-            onClick={() =>
-              navigate(`/product/${product.id}`, { state: product })
-            }   // ✅ IMPORTANT
             style={{
               opacity: visible ? 1 : 0,
               transform: visible

@@ -45,7 +45,7 @@ function Services() {
           <div
   key={item.id}
   style={{
-    width: "20%",  
+    width: "60%",  
     background: "white",
     padding: "35px 20px",
     textAlign: "center",

@@ -10,6 +10,7 @@ function Productcard({ product }) {
   return (
     <Link
       to={`/product/${product.id}`}
+      state={product}
       onClick={handleClick}
       style={{ textDecoration: "none", color: "inherit" }}
     >

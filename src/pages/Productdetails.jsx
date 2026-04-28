@@ -1,48 +1,49 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams, useLocation, useNavigate  } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
 import { isUserLoggedIn } from "../utils";
 
 function Productdetails() {
   const { id } = useParams();
   const location = useLocation();
-  const navigate = useNavigate();
   const { addToCart } = useContext(CartContext);
   const isLoggedIn = isUserLoggedIn();
-
-  const [finalProduct, setFinalProduct] = useState(location.state || null);
+  const [finalProduct, setFinalProduct] = useState(location.state ?? null);
   const [loading, setLoading] = useState(!location.state);
 
   useEffect(() => {
-    // ✅ If product already passed via navigation → skip fetch
-    if (location.state) return;
+    if (location.state) {
+      setFinalProduct(location.state);
+      setLoading(false);
+      return;
+    }
 
-    // ✅ Try fetching from API
-    fetch(`http://localhost:3000/products/${id}`)
+    setLoading(true);
+
+    fetch(`http://localhost:5000/products/${id}`)
       .then((res) => {
         if (!res.ok) throw new Error("Not found");
         return res.json();
       })
       .then((data) => {
         setFinalProduct(data);
-        setLoading(false);
       })
       .catch(() => {
-        // ❗ API failed → fallback to localStorage
-        const data = JSON.parse(localStorage.getItem("products")) || [];
-        const found = data.find((p) => p.id === parseInt(id));
-
-        setFinalProduct(found || null);
+        const storedProducts = JSON.parse(localStorage.getItem("products") || "[]");
+        const foundProduct = storedProducts.find(
+          (p) => String(p.id) === String(id)
+        );
+        setFinalProduct(foundProduct || null);
+      })
+      .finally(() => {
         setLoading(false);
       });
   }, [id, location.state]);
 
-  
   if (loading) {
-    return <h2 style={{ padding: "50px" }}>Loading...</h2>;
+    return <div style={{ padding: "50px" }}></div>;
   }
 
-  
   if (!finalProduct) {
     return <h2 style={{ padding: "50px" }}>Product not found</h2>;
   }
@@ -68,7 +69,6 @@ function Productdetails() {
           flexWrap: "wrap"
         }}
       >
-        
         <div
           style={{
             flex: "1",
@@ -92,7 +92,6 @@ function Productdetails() {
           />
         </div>
 
-      
         <div
           style={{
             flex: "1",
@@ -126,7 +125,6 @@ function Productdetails() {
             This is a premium quality product designed for comfort and style.
           </p>
 
-          {/* BUTTON */}
           {isLoggedIn && (
             <button
               onClick={() => addToCart(finalProduct)}
@@ -137,11 +135,8 @@ function Productdetails() {
                 border: "none",
                 borderRadius: "8px",
                 cursor: "pointer",
-                width: "200px",
-                transition: "0.3s"
+                width: "200px"
               }}
-              onMouseEnter={(e) => (e.target.style.background = "#333")}
-              onMouseLeave={(e) => (e.target.style.background = "#000")}
             >
               Add to Cart
             </button>
