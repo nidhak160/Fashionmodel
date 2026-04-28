@@ -52,8 +52,7 @@ function Productdetails() {
         padding: "60px 5vw",
         background: "#f9f9f9",
         minHeight: "80vh"
-      }}
-    >
+      }}>
       <div
         style={{
           maxWidth: "1100px",
@@ -65,8 +64,7 @@ function Productdetails() {
           borderRadius: "12px",
           boxShadow: "0 8px 25px rgba(0,0,0,0.08)",
           flexWrap: "wrap"
-        }}
-      >
+        }} >
         <div
           style={{
             flex: "1",
@@ -77,8 +75,7 @@ function Productdetails() {
             background: "#f5f5f5",
             borderRadius: "10px",
             padding: "20px"
-          }}
-        >
+          }} >
           <img
             src={finalProduct.image}
             alt={finalProduct.title}
@@ -97,8 +94,7 @@ function Productdetails() {
             display: "flex",
             flexDirection: "column",
             justifyContent: "center"
-          }}
-        >
+          }} >
           <h2 style={{ fontSize: "28px", marginBottom: "10px" }}>
             {finalProduct.title}
           </h2>
@@ -108,9 +104,8 @@ function Productdetails() {
               fontSize: "22px",
               fontWeight: "bold",
               marginBottom: "15px"
-            }}
-          >
-            â‚¹{finalProduct.price}
+            }}>
+            {finalProduct.price}
           </p>
 
           <p
@@ -118,8 +113,7 @@ function Productdetails() {
               color: "#666",
               lineHeight: "1.6",
               marginBottom: "25px"
-            }}
-          >
+            }}>
             This is a premium quality product designed for comfort and style.
           </p>
 
@@ -134,8 +128,7 @@ function Productdetails() {
                 borderRadius: "8px",
                 cursor: "pointer",
                 width: "200px"
-              }}
-            >
+              }} >
               Add to Cart
             </button>
           )}

@@ -50,8 +50,7 @@ function ProductList() {
       style={{
         padding: "60px 5vw",
         overflow: "hidden"
-      }}
-    >
+      }}>
 
       <h2
         style={{
@@ -60,8 +59,7 @@ function ProductList() {
           opacity: visible ? 1 : 0,
           transform: visible ? "translateY(0)" : "translateY(20px)",
           transition: "all 0.8s ease",
-        }}
-      >
+        }}>
         FEATURED PRODUCTS
       </h2>
 
@@ -70,8 +68,7 @@ function ProductList() {
           display: "grid",
           gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
           gap: "30px",
-        }}
-      >
+        }}>
         {filteredProducts.slice(0, 4).map((product, index) => (
           <div
             key={product.id}
@@ -83,8 +80,7 @@ function ProductList() {
               transition: "all 0.8s ease",
               transitionDelay: `${index * 120}ms`,
               cursor: "pointer"
-            }}
-          >
+            }}>
             <ProductCard product={product} />
           </div>
         ))}

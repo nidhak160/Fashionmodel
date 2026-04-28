@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { FaCalendarAlt, FaShoppingBag, FaGift, FaSyncAlt } from "react-icons/fa";
 
 function Services() {
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const services = [
     {
       id: 1,
@@ -30,78 +41,74 @@ function Services() {
   ];
 
   return (
-    <section style={{ background: "#f7f7f7", padding: " 0 20px"}}>
-     <div
-  style={{
-    width: "90%",
-    margin: "auto",
-    display: "flex",
-    justifyContent: "center",
-    gap: "20px",   
-    flexWrap: "wrap"
-  }}
->
+    <section style={{ background: "#f7f7f7", padding: "20px" }}>
+      <div
+        style={{
+          width: "90%",
+          margin: "auto",
+          display: "flex",
+          justifyContent: "center",
+          gap: "20px",
+          flexWrap: "wrap"
+        }}>
         {services.map((item) => (
           <div
-  key={item.id}
-  style={{
-    width: "60%",  
-    background: "white",
-    padding: "35px 20px",
-    textAlign: "center",
-    borderRadius: "10px",
-    transition: "all 0.4s ease",
-    boxShadow: "0 5px 15px rgba(0,0,0,0.05)",
-    cursor: "pointer"
-  }}
-
+            key={item.id}
+            style={{
+              width: isMobile ? "100%" : "22%",
+              background: "white",
+              padding: "35px 20px",
+              textAlign: "center",
+              borderRadius: "10px",
+              transition: "all 0.4s ease",
+              boxShadow: "0 5px 15px rgba(0,0,0,0.05)",
+              cursor: "pointer"
+            }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.transform = "translateY(-10px)";
-              e.currentTarget.style.boxShadow =
-                "0 15px 35px rgba(0,0,0,0.1)";
+              if (!isMobile) {
+                e.currentTarget.style.transform = "translateY(-10px)";
+                e.currentTarget.style.boxShadow =
+                  "0 15px 35px rgba(0,0,0,0.1)";
+              }
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.transform = "translateY(0)";
-              e.currentTarget.style.boxShadow =
-                "0 5px 20px rgba(0,0,0,0.05)";
-            }}
-          >
-            {/* Icon Circle */}
+              if (!isMobile) {
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.boxShadow =
+                  "0 5px 20px rgba(0,0,0,0.05)";
+              }
+            }} >
             <div
               style={{
-                width: "70px",
-                height: "70px",
+                width: isMobile ? "60px" : "70px",
+                height: isMobile ? "60px" : "70px",
                 margin: "0 auto 25px",
                 borderRadius: "50%",
                 background: "#d9c7c7",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                fontSize: "28px",
-                color: "#333",
-                transition: "all 0.3s ease"
-              }}
-            >
+                fontSize: isMobile ? "22px" : "28px",
+                color: "#333"
+              }} >
               {item.icon}
             </div>
 
             <h3
               style={{
-                fontSize: "20px",
+                fontSize: isMobile ? "18px" : "20px",
                 marginBottom: "15px",
                 fontWeight: "600"
-              }}
-            >
+              }} >
               {item.title}
             </h3>
 
             <p
               style={{
-                fontSize: "14px",
+                fontSize: isMobile ? "13px" : "14px",
                 color: "#777",
                 lineHeight: "1.7"
-              }}
-            >
+              }}>
               {item.desc}
             </p>
           </div>
