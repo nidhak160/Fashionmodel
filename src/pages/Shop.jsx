@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Shop.css";
+import { fetchJson } from "../utils/api";
 
 function Shop() {
   const [products, setProducts] = useState([]);
@@ -8,9 +9,9 @@ function Shop() {
 
   useEffect(() => {
     Promise.all([
-      fetch("http://localhost:5000/products").then(res => res.json()),
-      fetch("http://localhost:5000/newArrivals").then(res => res.json()),
-      fetch("http://localhost:5000/bestSelling").then(res => res.json())
+      fetchJson("/products"),
+      fetchJson("/newArrivals"),
+      fetchJson("/bestSelling")
     ])
       .then(([productsData, newArrivalsData, bestSellingData]) => {
 

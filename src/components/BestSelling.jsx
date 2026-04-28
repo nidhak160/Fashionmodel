@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
+import { fetchJson } from "../utils/api";
 
 function BestSelling() {
   const [products, setProducts] = useState([]);
@@ -8,8 +9,7 @@ function BestSelling() {
   const itemsPerView = 4; 
 
   useEffect(() => {
-    fetch("http://localhost:5000/bestSelling")
-      .then((res) => res.json())
+    fetchJson("/bestSelling")
       .then((data) => setProducts(data));
   }, []);
 

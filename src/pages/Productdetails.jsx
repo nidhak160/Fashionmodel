@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
 import { isUserLoggedIn } from "../utils";
+import { fetchJson } from "../utils/api";
 
 function Productdetails() {
   const { id } = useParams();
@@ -20,14 +21,11 @@ function Productdetails() {
 
     setLoading(true);
 
-    fetch(`http://localhost:5000/products/${id}`)
-      .then((res) => {
-        if (!res.ok) throw new Error("Not found");
-        return res.json();
-      })
-      .then((data) => {
-        setFinalProduct(data);
-      })
+    fetch("/db.json")
+  .then(res => res.json())
+  .then(data => {
+    setProducts(data.products); // 👈 IMPORTANT
+  })
       .catch(() => {
         const storedProducts = JSON.parse(localStorage.getItem("products") || "[]");
         const foundProduct = storedProducts.find(

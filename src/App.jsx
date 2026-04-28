@@ -28,6 +28,7 @@ import Shop from "./pages/Shop";
 import NewArrivals from "./components/NewArrivals";
 import Checkout from "./components/Checkout";
 import OrderForm from "./pages/OrderForm";
+import { fetchJson } from "./utils/api";
 
 
 function Home() {
@@ -52,11 +53,11 @@ function Home() {
 function App() {
 
   useEffect(() => {
-  fetch("http://localhost:3000/products")
-    .then(res => res.json())
+  fetchJson("/products")
     .then(data => {
       localStorage.setItem("products", JSON.stringify(data));
-    });
+    })
+    .catch(() => {});
 }, []);
 
   return (

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./Collection.css";
+import { fetchJson } from "../utils/api";
 
 function Collection() {
   const [collections, setCollections] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/collections")
-      .then((res) => res.json())
+    fetchJson("/collections")
       .then((data) => setCollections(data))
       .catch((err) => console.error("Error fetching data:", err));
   }, []);

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import ProductCard from "./Productcard";
 import { useSearchParams } from "react-router-dom";
+import { fetchJson } from "../utils/api";
 
 function ProductList() {
 
@@ -16,13 +17,13 @@ function ProductList() {
   );
 
   useEffect(() => {
-  fetch("http://localhost:5000/products")
-    .then(res => res.json())
+  fetchJson("/products")
     .then(data => {
       setProducts(data);
 
       localStorage.setItem("products", JSON.stringify(data));
-    });
+    })
+    .catch(() => {});
 }, []);
 
   useEffect(() => {

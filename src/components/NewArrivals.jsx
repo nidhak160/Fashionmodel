@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
+import { fetchJson } from "../utils/api";
 
 function NewArrivals() {
   const [items, setItems] = useState([]);
@@ -8,8 +9,7 @@ function NewArrivals() {
   const { addToCart } = useContext(CartContext); // (not needed here, but ok)
 
   useEffect(() => {
-    fetch("http://localhost:5000/newArrivals")
-      .then(res => res.json())
+    fetchJson("/newArrivals")
       .then(data => setItems(data))
       .catch(err => console.log(err));
   }, []);
