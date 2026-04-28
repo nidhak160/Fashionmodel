@@ -1,7 +1,9 @@
 import React from "react";
 import bgImage from "../assets/bg.jpg";
+import { useNavigate } from "react-router-dom";
 
 function Hero() {
+  const navigate = useNavigate();
   return (
     <section
       style={{
@@ -56,15 +58,17 @@ function Hero() {
         </p>
 
         <button
+          className="hero-shop-btn"
+          onClick={() => navigate("/shop")}
           style={{
             padding: "12px 30px",
             border: "none",
-            background: "#fff",
-            color: "#000",
             cursor: "pointer",
             fontWeight: "500",
             letterSpacing: "1px",
-          }}>
+            transition: "background 0.3s ease, color 0.3s ease",
+          }}
+        >
           SHOP NOW
         </button>
       </div>
@@ -80,6 +84,16 @@ function Hero() {
               opacity: 1;
               transform: translateY(0);
             }
+          }
+
+          .hero-shop-btn {
+            background: #fff;
+            color: #000;
+          }
+
+          .hero-shop-btn:hover {
+            background: #000;
+            color: #fff;
           }
         `}
       </style>

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext, useCallback } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 import { CartContext } from "../context/CartContext";
 import { NavLink, useNavigate } from "react-router-dom";
-import "./Navbar.css"; 
+import "./Navbar.css";
 
 function Navbar() {
   const { cart } = useContext(CartContext);
@@ -11,6 +11,7 @@ function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const user = JSON.parse(localStorage.getItem("loggedUser"));
+
   const logout = () => {
     localStorage.removeItem("loggedUser");
     navigate("/login");
@@ -44,49 +45,46 @@ function Navbar() {
 
   return (
     <>
-      {/* NAVBAR */}
       <header
         className="navbar"
         style={{
           background: scrolled ? "rgba(223,213,213,0.9)" : "#afa3a3",
-        }}
-      >
-        {/* LOGO */}
-        <NavLink to="/" className="logo">
-          KAIRA
-        </NavLink>
+        }}>
+        <div className="navbar-left">
+          <NavLink to="/" className="logo">
+            KAIRA
+          </NavLink>
+        </div>
 
-        {/* DESKTOP MENU */}
         {!isMobile && (
-          <nav className="nav-links">
-            {navItems.map((item, index) => (
-              <NavLink
-                key={index}
-                to={item.path}
-                className={({ isActive }) =>
-                  isActive ? "nav-link active" : "nav-link"
-                }
-              >
-                {item.name} {item.name === "CART" && `(${cart.length})`}
-              </NavLink>
-            ))}
-          </nav>
+          <>
+            <nav className="nav-links navbar-center">
+              {navItems.map((item, index) => (
+                <NavLink
+                  key={index}
+                  to={item.path}
+                  className={({ isActive }) =>
+                    isActive ? "nav-link active" : "nav-link"
+                  }>
+                  {item.name} {item.name === "CART" && `(${cart.length})`}
+                </NavLink>
+              ))}
+            </nav>
+
+            <div className="navbar-right">
+              {user ? (
+                <button className="auth-btn logout-btn" onClick={logout}>
+                  LOGOUT
+                </button>
+              ) : (
+                <NavLink to="/login" className="auth-btn">
+                  LOGIN
+                </NavLink>
+              )}
+            </div>
+          </>
         )}
 
-        {/* LOGIN / LOGOUT */}
-        {!isMobile && (
-          user ? (
-            <button className="logout-btn" onClick={logout}>
-              LOGOUT
-            </button>
-          ) : (
-            <NavLink to="/login" className="nav-link">
-              LOGIN
-            </NavLink>
-          )
-        )}
-
-        {/* MOBILE ICON */}
         {isMobile && (
           <div className="menu-icon" onClick={toggleMenu}>
             {menuOpen ? <FiX /> : <FiMenu />}
@@ -94,14 +92,15 @@ function Navbar() {
         )}
       </header>
 
-      {/* MOBILE MENU */}
       {isMobile && menuOpen && (
         <div className="mobile-menu">
           {navItems.map((item, index) => (
             <NavLink
               key={index}
               to={item.path}
-              className="nav-link"
+              className={({ isActive }) =>
+                isActive ? "nav-link active" : "nav-link"
+              }
               onClick={() => setMenuOpen(false)}
             >
               {item.name} {item.name === "CART" && `(${cart.length})`}
@@ -109,9 +108,20 @@ function Navbar() {
           ))}
 
           {user ? (
-            <button onClick={logout}>LOGOUT</button>
+            <button
+              className="auth-btn logout-btn"
+              onClick={() => {
+                setMenuOpen(false);
+                logout();
+              }}>
+              LOGOUT
+            </button>
           ) : (
-            <NavLink to="/login" className="nav-link">
+            <NavLink
+              to="/login"
+              className="auth-btn"
+              onClick={() => setMenuOpen(false)}
+            >
               LOGIN
             </NavLink>
           )}
