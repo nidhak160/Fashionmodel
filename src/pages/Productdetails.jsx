@@ -21,16 +21,16 @@ function Productdetails() {
 
     setLoading(true);
 
-    fetch("/db.json")
-  .then(res => res.json())
-  .then(data => {
-    setProducts(data.products); // 👈 IMPORTANT
-  })
+    fetchJson(`/products/${id}`)
+      .then((data) => {
+        setFinalProduct(data);
+      })
       .catch(() => {
         const storedProducts = JSON.parse(localStorage.getItem("products") || "[]");
         const foundProduct = storedProducts.find(
-          (p) => String(p.id) === String(id)
+          (product) => String(product.id) === String(id)
         );
+
         setFinalProduct(foundProduct || null);
       })
       .finally(() => {
@@ -110,7 +110,7 @@ function Productdetails() {
               marginBottom: "15px"
             }}
           >
-            ₹{finalProduct.price}
+            â‚¹{finalProduct.price}
           </p>
 
           <p
