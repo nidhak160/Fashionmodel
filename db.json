@@ -63,7 +63,78 @@
       "title": "CASUAL DENIM JACKET",
       "price": "$85.00",
       "image": "https://images.pexels.com/photos/532588/pexels-photo-532588.jpeg"
-    }
+    },
+
+{
+  "id": 11,
+  "title": "Floral Maxi Dress",
+  "price": 110,
+  "image": "https://images.pexels.com/photos/994523/pexels-photo-994523.jpeg",
+  "category": "women"
+},
+{
+  "id": 12,
+  "title": "Formal White Shirt",
+  "price": 70,
+  "image": "https://images.pexels.com/photos/298863/pexels-photo-298863.jpeg",
+  "category": "men"
+},
+{
+  "id": 13,
+  "title": "Casual Hoodie",
+  "price": 95,
+  "image": "https://images.pexels.com/photos/6311612/pexels-photo-6311612.jpeg",
+  "category": "men"
+},
+{
+  "id": 14,
+  "title": "Elegant Evening Gown",
+  "price": 180,
+  "image": "https://images.pexels.com/photos/1021693/pexels-photo-1021693.jpeg",
+  "category": "women"
+},
+{
+  "id": 15,
+  "title": "Sports Sneakers",
+  "price": 130,
+  "image": "https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg",
+  "category": "accessories"
+},
+{
+  "id": 16,
+  "title": "Leather Belt",
+  "price": 45,
+  "image": "https://images.pexels.com/photos/45055/pexels-photo-45055.jpeg",
+  "category": "accessories"
+},
+{
+  "id": 17,
+  "title": "Denim Jeans",
+  "price": 85,
+  "image": "https://images.pexels.com/photos/1598505/pexels-photo-1598505.jpeg",
+  "category": "men"
+},
+{
+  "id": 18,
+  "title": "Summer Skirt",
+  "price": 60,
+  "image": "https://images.pexels.com/photos/428338/pexels-photo-428338.jpeg",
+  "category": "women"
+},
+{
+  "id": 19,
+  "title": "Classic Handbag",
+  "price": 140,
+  "image": "https://images.pexels.com/photos/1152077/pexels-photo-1152077.jpeg",
+  "category": "accessories"
+},
+{
+  "id": 20,
+  "title": "Winter Jacket",
+  "price": 200,
+  "image": "https://images.pexels.com/photos/1126993/pexels-photo-1126993.jpeg",
+  "category": "men"
+}
   ],
 
   "collections": [
@@ -121,13 +192,6 @@
 "category": "women"
 },
 
-{
-"id": 5,
-"title": "Stylish Sunglasses",
-"price": 35,
-"image": "https://images.pexels.com/photos/46710/pexels-photo-46710.jpeg",
-"category": "accessories"
-},
 
 {
 "id": 6,
@@ -167,7 +231,78 @@
 "price": 50,
 "image": "https://images.pexels.com/photos/6626903/pexels-photo-6626903.jpeg",
 "category": "men"
+},
+{
+  "id": 11,
+  "title": "Wireless Earbuds",
+  "price": 95,
+  "image": "https://images.pexels.com/photos/3394650/pexels-photo-3394650.jpeg",
+  "category": "accessories"
+},
+{
+  "id": 12,
+  "title": "Bluetooth Headphones",
+  "price": 150,
+  "image": "https://images.pexels.com/photos/1649771/pexels-photo-1649771.jpeg",
+  "category": "accessories"
+},
+{
+  "id": 13,
+  "title": "Smart Fitness Band",
+  "price": 120,
+  "image": "https://images.pexels.com/photos/267394/pexels-photo-267394.jpeg",
+  "category": "accessories"
+},
+{
+  "id": 14,
+  "title": "Luxury Perfume",
+  "price": 180,
+  "image": "https://images.pexels.com/photos/965989/pexels-photo-965989.jpeg",
+  "category": "accessories"
+},
+{
+  "id": 15,
+  "title": "Travel Trolley Bag",
+  "price": 250,
+  "image": "https://images.pexels.com/photos/1008155/pexels-photo-1008155.jpeg",
+  "category": "accessories"
+},
+{
+  "id": 16,
+  "title": "Gaming Mouse",
+  "price": 70,
+  "image": "https://images.pexels.com/photos/5082579/pexels-photo-5082579.jpeg",
+  "category": "accessories"
+},
+{
+  "id": 17,
+  "title": "Laptop Sleeve Bag",
+  "price": 85,
+  "image": "https://images.pexels.com/photos/18105/pexels-photo.jpg",
+  "category": "accessories"
+},
+{
+  "id": 18,
+  "title": "Silver Chain Necklace",
+  "price": 60,
+  "image": "https://images.pexels.com/photos/1453008/pexels-photo-1453008.jpeg",
+  "category": "accessories"
+},
+{
+  "id": 19,
+  "title": "Gold Ring",
+  "price": 140,
+  "image": "https://images.pexels.com/photos/1616403/pexels-photo-1616403.jpeg",
+  "category": "accessories"
+},
+{
+  "id": 20,
+  "title": "Bracelet Set",
+  "price": 55,
+  "image": "https://images.pexels.com/photos/1191531/pexels-photo-1191531.jpeg",
+  "category": "accessories"
 }
+
 
 ]
 }

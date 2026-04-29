@@ -4,8 +4,15 @@ import { useNavigate } from "react-router-dom";
 
 import outfit1 from "../assets/outfit1.jpg";
 import outfit2 from "../assets/outfit2.jpg";
-import kurta1 from "../assets/Lakhany Ready to Wear Embroidered Shalwar & Kameez Suit - LGADMAN1025-BROWN.jpg";
-import kurta2 from "../assets/Herren Kurta Pyjama Set_ Armani Baumwollmischung, modernes Eid-Outfit.jpg";
+import outfit3 from "../assets/outfit3.jpg";
+import outfit4 from "../assets/outfit4.jpg";
+import outfit5 from "../assets/outfit5.jpg";
+import outfit6 from "../assets/outfit6.jpg";
+import outfit7 from "../assets/outfit7.jpg";
+import outfit8 from "../assets/outfit8.jpg";
+import outfit9 from "../assets/outfit9.jpg";
+import outfit10 from "../assets/outfit10.jpg";
+
 
 function Menspage() {
   const navigate = useNavigate();
@@ -16,11 +23,17 @@ function Menspage() {
   const loggedIn = !!localStorage.getItem("loggedUser");
 
   const products = [
-    { id: 1, brand: "Manyavar", title: "Beige Kurta Set", price: 1800, oldPrice: 2500, image: kurta2 },
-    { id: 2, brand: "Fabindia", title: "Brown Kurta", price: 1600, oldPrice: 2200, image: kurta1 },
-    { id: 3, brand: "Raymond", title: "Classic Beige Coat", price: 3200, oldPrice: 4200, image: outfit1 },
-    { id: 4, brand: "Louis Philippe", title: "Black Casual Suit", price: 2800, oldPrice: 3500, image: outfit2 }
-  ];
+  { id: 1, brand: "Raymond", title: "Classic Beige Coat", price: 3200, oldPrice: 4200, image: outfit1 },
+  { id: 2, brand: "Louis Philippe", title: "Black Casual Suit", price: 2800, oldPrice: 3500, image: outfit2 },
+  { id: 3, brand: "Zara", title: "Slim Fit Blazer", price: 2600, oldPrice: 3400, image: outfit3 },
+  { id: 4, brand: "H&M", title: "Casual Shirt", price: 1400, oldPrice: 2000, image: outfit4 },
+  { id: 5, brand: "Allen Solly", title: "Formal Shirt", price: 1500, oldPrice: 2100, image: outfit5 },
+  { id: 6, brand: "Peter England", title: "Office Wear", price: 1800, oldPrice: 2400, image: outfit6 },
+  { id: 7, brand: "Van Heusen", title: "Premium Suit", price: 3500, oldPrice: 4500, image: outfit7 },
+  { id: 8, brand: "Levis", title: "Denim Jacket", price: 2200, oldPrice: 3000, image: outfit8 },
+  { id: 9, brand: "Roadster", title: "Casual Hoodie", price: 1300, oldPrice: 1900, image: outfit9 },
+  { id: 10, brand: "Jack & Jones", title: "Stylish Outfit", price: 2500, oldPrice: 3300, image: outfit10 },
+];
 
   return (
     <div style={{ padding: "60px 5vw" }}>

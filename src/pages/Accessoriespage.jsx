@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 import { CartContext } from "../context/CartContext";
 import { useNavigate } from "react-router-dom";
-import { isUserLoggedIn } from "../utils";   
+import { isUserLoggedIn } from "../utils";
 
 function Accessoriespage() {
-
   const [products, setProducts] = useState([]);
   const isLoggedIn = isUserLoggedIn();
   const { addToCart } = useContext(CartContext);
@@ -12,107 +11,178 @@ function Accessoriespage() {
 
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem("products")) || [];
-    const accessories = data.filter(p => p.category === "accessories");
+    const accessories = data.filter((p) => p.category === "accessories");
     setProducts(accessories);
   }, []);
 
   return (
-    <div style={{
-      padding: "60px 5vw",
-      fontFamily: "Arial, sans-serif",
-      background: "#fafafa"
-    }}>
-
-      <h2 style={{
-        marginBottom: "40px",
-        fontSize: "28px",
-        fontWeight: "600"
-      }}>
-        Accessories
+    <div
+      style={{
+        paddingTop: "10px", 
+        paddingLeft: "6vw",
+        paddingRight: "6vw",
+        paddingBottom: "60px",
+        background: "#f8f9fb",
+        minHeight: "100vh",
+        fontFamily: "Arial, sans-serif"
+      }}
+    >
+      {/* Heading */}
+      <h2
+        style={{
+          fontSize: "30px",
+          fontWeight: "700",
+          textAlign: "center",
+          marginBottom: "50px",
+          letterSpacing: "1px"
+        }}
+      >
+        Accessories Collection
       </h2>
 
-      <div style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(auto-fit, minmax(240px,1fr))",
-        gap: "30px"
-      }}>
-
+      {/* Grid */}
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+          gap: "30px"
+        }}
+      >
         {products.map((p) => (
-
           <div
             key={p.id}
             onClick={() => navigate(`/product/${p.id}`, { state: p })}
             style={{
-              border: "1px solid #eee",
-              borderRadius: "14px",
               background: "#fff",
-              padding: "15px",
-              textAlign: "center",
+              borderRadius: "18px",
+              overflow: "hidden",
               cursor: "pointer",
-              transition: "all 0.3s ease",
-              boxShadow: "0 4px 12px rgba(0,0,0,0.05)"
+              boxShadow: "0 10px 25px rgba(0,0,0,0.06)",
+              transition: "all 0.3s ease"
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.transform = "translateY(-8px)";
-              e.currentTarget.style.boxShadow = "0 12px 25px rgba(0,0,0,0.15)";
+              e.currentTarget.style.transform = "translateY(-10px)";
+              e.currentTarget.style.boxShadow =
+                "0 20px 40px rgba(0,0,0,0.15)";
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.transform = "translateY(0)";
-              e.currentTarget.style.boxShadow = "0 4px 12px rgba(0,0,0,0.05)";
-            }}>
-
-            <img
-              src={p.image}
-              alt={p.title}
+              e.currentTarget.style.boxShadow =
+                "0 10px 25px rgba(0,0,0,0.06)";
+            }}
+          >
+            {/* Image */}
+            <div
               style={{
-                width: "100%",
-                height: "320px",
-                objectFit: "cover",
-                borderRadius: "10px"
-              }}/>
-
-            <h4 style={{
-              margin: "12px 0",
-              fontSize: "16px",
-              fontWeight: "600"
-            }}>
-              {p.title}
-            </h4>
-
-            <p style={{
-              fontWeight: "bold",
-              fontSize: "16px"
-            }}>
-              ₹{p.price}
-            </p>
-
-            {isLoggedIn && (
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  addToCart(p);   // ✅ WORKING
-                }}
+                height: "260px",
+                background: "#f2f2f2",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center"
+              }}
+            >
+              <img
+                src={p.image}
+                alt={p.title}
                 style={{
-                  marginTop: "12px",
-                  padding: "10px",
-                  width: "100%",
-                  background: "#000",
-                  color: "#fff",
-                  border: "none",
-                  borderRadius: "8px",
-                  cursor: "pointer"
+                  maxWidth: "100%",
+                  maxHeight: "100%",
+                  objectFit: "contain",
+                  transition: "0.3s"
                 }}
-                onMouseEnter={(e) => e.target.style.background = "#333"}
-                onMouseLeave={(e) => e.target.style.background = "#000"}
+              />
+            </div>
+
+            {/* Info */}
+            <div style={{ padding: "18px" }}>
+              <h4
+                style={{
+                  fontSize: "16px",
+                  fontWeight: "600",
+                  marginBottom: "10px"
+                }}
               >
-                Add to Cart
-              </button>
-            )}
+                {p.title}
+              </h4>
 
+              {/* Price */}
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "10px"
+                }}
+              >
+                <span
+                  style={{
+                    fontWeight: "700",
+                    fontSize: "17px",
+                    color: "#111"
+                  }}
+                >
+                  ₹{p.price}
+                </span>
+
+                {p.oldPrice && (
+                  <>
+                    <span
+                      style={{
+                        textDecoration: "line-through",
+                        color: "#999",
+                        fontSize: "14px"
+                      }}
+                    >
+                      ₹{p.oldPrice}
+                    </span>
+
+                    <span
+                      style={{
+                        color: "green",
+                        fontSize: "13px",
+                        fontWeight: "600"
+                      }}
+                    >
+                      {Math.round(
+                        ((p.oldPrice - p.price) / p.oldPrice) * 100
+                      )}
+                      % OFF
+                    </span>
+                  </>
+                )}
+              </div>
+
+              {/* Button */}
+              {isLoggedIn && (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    addToCart(p);
+                  }}
+                  style={{
+                    marginTop: "15px",
+                    width: "100%",
+                    padding: "11px",
+                    border: "none",
+                    background: "#111",
+                    color: "#fff",
+                    borderRadius: "10px",
+                    fontWeight: "600",
+                    cursor: "pointer",
+                    transition: "0.3s"
+                  }}
+                  onMouseEnter={(e) =>
+                    (e.target.style.background = "#333")
+                  }
+                  onMouseLeave={(e) =>
+                    (e.target.style.background = "#111")
+                  }
+                >
+                  Add to Cart
+                </button>
+              )}
+            </div>
           </div>
-
         ))}
-
       </div>
     </div>
   );

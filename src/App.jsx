@@ -29,7 +29,7 @@ import NewArrivals from "./components/NewArrivals";
 import Checkout from "./components/Checkout";
 import OrderForm from "./pages/OrderForm";
 import { fetchJson } from "./utils/api";
-
+import ScrollToTop from "./components/ScrollToTop";
 
 function Home() {
   return (
@@ -65,6 +65,7 @@ function App() {
       <WishlistProvider>
       <BrowserRouter>
         <Navbar />
+    <ScrollToTop />
 
  <Routes>
   <Route path="/" element={<Home />} />
